@@ -1,0 +1,14 @@
+# Class information
+#
+# First three columns identifies a class session
+# Last two columns define the timeframe for feedback (FB)
+#    
+# There MUST not be any overlapping time
+#
+# CLASS 	CLASS_WEEKDAY	CLASS_START		FB_BEGIN		FB_END
+COMP122 	Monday 			9:00 			9:00 			10:50
+COMP122 	Monday 			2:00 			2:00 			4:50
+COMP122 	Monday 			9:00 			9:00 			10:50
+COMP122 	Monday 			2:00 			2:00 			4:50
+
+
