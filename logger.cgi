@@ -23,7 +23,6 @@
 source participation.env 
 # Note: program my exit as appropriate in participation.env
 
-
 LOG_FILE=logs/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME
 
 
