@@ -41,7 +41,7 @@ LOG_FILE=logs/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME
    echo
 } >> $LOG_FILE
 
-cat <<EOF
+cat <<-EOF
 x-program: participation
 x-program-info: $CLASS $CLASS_WEEKDAY $CLASS_TIME
 x-program-date: $(date)
