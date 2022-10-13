@@ -1,0 +1,47 @@
+TODO
+
+form input:
+   cleanup webpage:  template messages
+
+.htaccess
+   INDEX page
+
+see if .htpasswd can be used to get email address
+would be nice if they could use @my.csun.edu address authentication
+
+
+Master Page:
+   - provides static QR code  V0
+   - has link to input.cgi    V0
+   - displays:
+     - current class in session V0
+     - generated dynamic code (word of the day)
+     - dummy text area for a prompt
+
+   - view app
+     - updated/record code  -- could be htaccess password
+     - update/record prompt
+     - creates log file with header info
+       - code and prompt
+
+   - dyanmic QR code
+     - includes query string with
+       - code
+       - input.cgi, passes along code
+       - logger.cgi, checks the code
+
+   -n provides menu system to
+      - edit class-info
+      - turn system on/off
+      - sets done_URL
+
+Notes
+   MasterPage  --link / QR --> input.cgi
+
+   input.cgi
+      -> not-in-session.html
+      -> logger.cgi
+
+   logger.cgi
+      -> not-in-session.html  -> Master Page
+      -> recorded.html        -> Master Page
