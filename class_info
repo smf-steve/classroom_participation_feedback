@@ -11,4 +11,8 @@ COMP122 	Monday 			9:00 			900 			1050
 COMP122 	Monday 			2:00 			1400 			1550
 COMP122 	Wednesday 		9:00 			900 			1050
 COMP122 	Wednesday 		2:00 			1400 			1550
-TEST		Wednesday		2:00 			0 				2400
+COMP122 	Tuesday			9:00 			900 			1050
+COMP122 	Tuesday			2:00 			1400 			1550
+COMP122 	Thursday 		9:00 			900 			1050
+COMP122 	Thursday		2:00 			1400 			1550
+TEST		Thursday		2:00 			0 				2400

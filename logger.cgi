@@ -21,7 +21,9 @@
 #   1. Return Thank you page
 
 source participation.env 
-# Note: program my exit as appropriate in participation.env
+if [[ $(in_session_p) != "TRUE" ]]  ; then
+  exit 0;
+fi
 
 LOG_FILE=logs/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME
 

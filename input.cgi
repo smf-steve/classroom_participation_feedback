@@ -14,7 +14,9 @@
 #      - Feedback/response
 
 source participation.env 
-# Note: program my exit as appropriate in participation.env
+if [[ $(in_session_p) != "TRUE" ]]  ; then
+  exit 0;
+fi
 
 
 cat <<EOF
@@ -46,10 +48,10 @@ content-Type: text/html
   <input type="range" id="rating_id" name="rating" min="0" max="10"><br>
 
   <br><br>
-  <label for="response_id">Feedback/Response:</label><br>
-  <textarea id="response_id" name="response" rows="10" cols="80">
-   Either provide feedback for today's class
-   or Providy your response to prompt provided in class
+  <label for="response_id">Feedback:</label><br>
+  <textarea id="response_id" placeholder="Provide general feedback for today's class"
+  name="response" rows="10" cols="80">
+   
   </textarea>
 
 
