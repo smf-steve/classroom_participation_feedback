@@ -21,7 +21,7 @@
 #   1. Return Thank you page
 
 source participation.env 
-if [[ $(in_session_p) != "TRUE" ]]  ; then
+if [[ $(in_session_p) != 0 ]]  ; then
   exit 0;
 fi
 

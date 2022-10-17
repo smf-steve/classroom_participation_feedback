@@ -14,7 +14,14 @@
 #      - Feedback/response
 
 source participation.env 
-if [[ $(in_session_p) != "TRUE" ]]  ; then
+in_session_p
+if [[ $? != 0 ]]  ; then
+  cat <<EOF
+x-participation: No class in session
+x-participation-date: $(date)
+location: ./not-in-session.html
+
+EOF
   exit 0;
 fi
 
