@@ -6,13 +6,16 @@
 #   - the FB_BEGIN and FB_END time must be military time
 #    
 #
-# CLASS 	CLASS_WEEKDAY	CLASS_START		FB_BEGIN		FB_END
-COMP122 	Monday 			9:00 			900 			1050
-COMP122 	Monday 			2:00 			1400 			1550
-COMP122 	Wednesday 		9:00 			900 			1050
-COMP122 	Wednesday 		2:00 			1400 			1550
-COMP122 	Tuesday			9:00 			900 			1050
-COMP122 	Tuesday			2:00 			1400 			1550
-COMP122 	Thursday 		9:00 			900 			1050
-COMP122 	Thursday		2:00 			1400 			1550
-TEST		Thursday		2:00 			0 				2400
+# CLASS     CLASS_WEEKDAY           CLASS_START             FB_BEGIN                FB_END
+COMP122     Monday                  9:00                    900                     1050
+COMP122     Monday                  2:00                    1400                    1550
+COMP122     Wednesday               9:00                    900                     1050
+COMP122     Wednesday               2:00                    1400                    1550
+COMP122     Tuesday                 9:00                    900                     1050
+COMP122     Tuesday                 2:00                    1400                    1550
+COMP122     Thursday                9:00                    900                     1050
+COMP122     Thursday                2:00                    1400                    1550
+Mon_TEST    Monday                  2:00                    0                       2400
+Tue_TEST    Monday                  2:00                    0                       2400
+Wed_TEST    Monday                  2:00                    0                       2400
+Thur_TEST   Monday                  2:00                    0                       2400
