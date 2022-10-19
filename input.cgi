@@ -52,7 +52,7 @@ content-Type: text/html
   <input type="text" id="code_id" name="code" value=""><br>
 
   <label for="rating_id">Value of Today's Class (0=low ... 10=high):</label><br>
-  <input type="range" id="rating_id" name="rating" min="0" max="10"><br>
+  <input type="range" id="rating_id" name="rating" value="-1" min="-1" max="10"><br>
 
   <br><br>
   <label for="response_id">Feedback:</label><br>
