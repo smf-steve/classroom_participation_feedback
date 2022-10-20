@@ -37,7 +37,7 @@ content-Type: text/html
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Participation System</title>
+      <title>Participation and Feedback System</title>
 
       <!-- CSS CDN -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -100,7 +100,7 @@ content-Type: text/html
 
     <!-- Top of Page -->
     <div class="container">
-      <h2>Participation System</h2>
+      <h2>Participation and Feedback System</h2>
     </div>
     <div class="container">
       <h3>$CLASS $CLASS_WEEKDAY @ $CLASS_TIME</h3>
