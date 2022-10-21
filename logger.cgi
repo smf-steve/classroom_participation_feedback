@@ -24,7 +24,7 @@ source participation.env
 in_session_p
 if [[ $? != 0 ]]  ; then
   cat <<EOF
-x-participation: No class in session
+x-participation-info: No class in session
 x-participation-date: $(date)
 location: ./not-in-session.html
 
@@ -51,9 +51,8 @@ LOG_FILE=logs/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME
 } >> $LOG_FILE
 
 cat <<-EOF
-x-program: participation
-x-program-info: $CLASS $CLASS_WEEKDAY $CLASS_TIME
-x-program-date: $(date)
+x-participation-info: $CLASS $CLASS_WEEKDAY $CLASS_TIME
+x-participation-date: $(date)
 location: ./recorded.html
 
 EOF
