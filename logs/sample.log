@@ -1,0 +1,16 @@
+# Sample Log File
+#
+# File Example: 2022-10-13:COMP122-Thursday-2:00.log
+#
+#
+# Fields are comma (,) separated.
+# Filed names, with examples:
+#   Date: 2022-10-13
+#   Time: 15:34
+#   Class: COMP122
+#   Class_day: Thursday
+#   Class_time: 2:00
+#   email: steve@my.csun.edu
+#   rating: 8
+#   response: I+have+no+feedback+for+today
+2022-10-13,15:34,COMP122-Thursday-2:00,email=steve%40my.csun.edu,rating=8,response=I+have+no+feedback+for+today
