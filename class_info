@@ -16,6 +16,20 @@ COMP122     Tuesday                 2:00                    1400                
 COMP122     Thursday                9:00                    900                     1050
 COMP122     Thursday                2:00                    1400                    1550
 Mon_TEST    Monday                  2:00                    0                       2400
-Tue_TEST    Wednesday               2:00                    0                       2400
-Wed_TEST    Monday                  2:00                    0                       2400
-Thur_TEST   Monday                  2:00                    0                       2400
+Tue_TEST    Tuesday                 2:00                    0                       2400
+Wed_TEST    Wednesday               2:00                    0                       2400
+Thur_TEST   Thursday                2:00                    0                       2400
+
+# CLASS     DAYS    CLASS_START   FB_WEEKDAY     FB_BEGIN  	FB_END
+COMP122     M/W     9:00          Monday         900   		1050
+COMP122     M/W     2:00          Monday         1400  		1550
+COMP122     M/W     9:00          Wednesday      900   		1050
+COMP122     M/W     2:00          Wednesday      1400  		1550
+COMP122     T/R     9:00          Tuesday        900   		1050
+COMP122     T/R     2:00          Tuesday        1400  		1550
+COMP122     T/R     9:00          Thursday       900   		1050
+COMP122     T/R     2:00          Thursday       1400  		1550
+Mon_TEST    M       2:00          Monday         0     		2400
+Tue_TEST    T       2:00          Tuesday        0     		2400
+Wed_TEST    W       2:00          Wednesday      0     		2400
+Thur_TEST   R       2:00          Thursday       0     		2400
