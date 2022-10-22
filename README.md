@@ -25,7 +25,7 @@ This system is designed to as frictionless as possible to encourage student part
      - text response (possible to a specific prompt)
   1. Students may visit the ``index.html`` page to obtain a summary report
 
-     ![General Workflow](workflow.png)
+     ![General Workflow](documentation/workflow.png)
 
 #### Possible Upgrades:
   * Student Authentication 
@@ -73,8 +73,9 @@ In short, we specifically designed the system with a reduce set of controls.  Su
      - To generate a QR code for students to access the system
      - To set a prompt or to record the number of attendees
      - To display a summary of current's week feedback <br>
-       (May trigger backend process to process log files)
+       (May trigger back-end process to process log files)
 
+   ![Layout of Primary Page](documentation/index.html.png)
 
 1. Input Page
    * URL: participation/input.cgi
@@ -141,6 +142,7 @@ The currently, all the files are placed into the public_html file hierarchy.  In
 
   * apps
     * participation
+      * class_info
       * public
         * reports
       * logs
