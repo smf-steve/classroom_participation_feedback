@@ -11,7 +11,6 @@
 #
 #   1. Validate Form Data
 #      - CSUN email address
-#      - Participation Code
 #      - Rating of the Day
 #      - Feedback/response
 #
