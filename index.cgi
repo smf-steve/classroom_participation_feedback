@@ -3,9 +3,20 @@
 source participation.env 
 in_session_p
 if [[ $? != 0 ]]  ; then
-  : #exit 0;
+  in_session=FALSE
 fi
 
+if [[ $in_session == "FALSE" ]] ; then
+  PNG_FILE="not-in-session.png"
+else
+  PNG_FILE="qr-code.png"
+  PNG_TITLE_DIV="
+    <div>
+      <h3>$CLASS $CLASS_WEEKDAY @ $CLASS_TIME</h3>
+      Feel free to provided feedback to today's class.
+    <div>"
+
+fi
 
 cat <<EOF
 
@@ -14,7 +25,7 @@ cat <<EOF
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Participation and Feedback System</title>
+      <title>Classroom Participation and Feedback System</title>
 
 
       <!-- CSS CDN -->
@@ -65,19 +76,16 @@ cat <<EOF
 <body class="text-bg-light p-3" id="body">
   
    <div class="container">
-      <h2>Participation and Feedback System</h2>
-      Feel free to provided feedback to today's class.
+      <h2>Classroom Participation and Feedback System</h2>
    </div>
    <br>
-   <div class="container" style="text-align: center;">
-      <h3>$CLASS $CLASS_WEEKDAY @ $CLASS_TIME</h3>
+   <div class="container"  style="text-align: center;">
+      ${PNG_TITLE_DIV}
       <a href=https://www.csun.edu/~steve/participation/input.cgi>
-        <img  src="qr-code.png" style="margin-top: -14px;"
-        alt="A QR code for https://www.csun.edu/~steve/participation/input.cgi">
+        <img  src="${PNG_FILE}" height="450" width="450" style="margin-top: -14px;"
+        alt="A QR code to access the input.cgi script">
       </a>
-      <p>$(date)</p>
   </div>
-
 </body>
 </html>
 
