@@ -9,7 +9,6 @@
 #
 #   1. Present Form Data
 #      - CSUN email address
-#      - Participation Code
 #      - Rating of the Day
 #      - Feedback/response
 
@@ -36,7 +35,7 @@ content-Type: text/html
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Participation and Feedback System</title>
+      <title>Classroom Participation and Feedback System</title>
 
       <!-- CSS CDN -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -99,7 +98,7 @@ content-Type: text/html
 
     <!-- Top of Page -->
     <div class="container">
-      <h2>Participation and Feedback System</h2>
+      <h2>Classroom Participation and Feedback System</h2>
     </div>
     <div class="container">
       <h3>$CLASS $CLASS_WEEKDAY @ $CLASS_TIME</h3>
@@ -155,43 +154,4 @@ content-Type: text/html
   </body>
 </html>
 EOF
-
-
-# # <!DOCTYPE html>
-# <html>
-# <body>
-# 
-# <h2>Participation System</h2>
-# 
-# <h3>$CLASS $CLASS_WEEKDAY @ $CLASS_TIME</h3>
-# 
-# <p>Today's Date: $(date)</p>
-# 
-# <p>
-# <form action="./logger.cgi">
-#   <label for="email_id">CSUN Email Address:</label><br>
-#   <input type="email" id="email_id" name="email" 
-#          placeholder="@my.csun.edu" value=""><br>
-# 
-#   <label for="code_id">Participation Code:</label><br>
-#   <input type="text" id="code_id" name="code" value=""><br>
-# 
-#   <label for="rating_id">Value of Today's Class (0=low ... 10=high):</label><br>
-#   <input type="range" id="rating_id" name="rating" value="-1" min="-1" max="10"><br>
-# 
-#   <br><br>
-#   <label for="response_id">Feedback:</label><br>
-#   <textarea id="response_id" placeholder="Provide general feedback for today's class"
-#   name="response" rows="10" cols="80">
-#    
-#   </textarea>
-# 
-# 
-#   <br><br>
-#   <input type="submit" value="Submit">
-# </form> 
-# 
-# </body>
-# </html>
-# EOF
 
