@@ -31,7 +31,7 @@ EOF
   exit 0;
 fi
 
-LOG_FILE=logs/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME
+LOG_FILE=logs/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME.log
 
 
 # Create the log information
@@ -47,7 +47,7 @@ LOG_FILE=logs/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME
        done   
    fi
    echo
-} >> $LOG_FILE
+} | sed 's/,$//' >> $LOG_FILE
 
 cat <<-EOF
 x-participation-info: $CLASS $CLASS_WEEKDAY $CLASS_TIME
