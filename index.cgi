@@ -82,7 +82,7 @@ cat <<EOF
    <div class="container"  style="text-align: center;">
       ${PNG_TITLE_DIV}
       <a href=https://www.csun.edu/~steve/participation/input.cgi>
-        <img  src="${PNG_FILE}" height="450" width="450" style="margin-top: -14px;"
+        <img  src="${PNG_FILE}" height="450" width="450"
         alt="A QR code to access the input.cgi script">
       </a>
   </div>
