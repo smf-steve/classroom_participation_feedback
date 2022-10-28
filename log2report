@@ -1,0 +1,97 @@
+#! /bin/bash
+
+LOG_FILE="$1"
+if [[ ! -f ${LOG_FILE} ]] ; then
+  echo "usage: $0 file.log"
+  echo "  output is placed into file.env"
+  exit 1
+fi
+REPORT_FILE=$(basename -s .log ${LOG_FILE}).env  # add the .env later
+
+if [[ -f ${REPORT_FILE} ]] ; then
+  # If there is a report file, source it
+  source ${REPORT_FILE}
+else
+  # define the adder values
+  FILENAME=${REPORT_FILE}
+    _session=$(awk -F: '{ print $2}' <<< ${LOG_FILE})
+  CLASS=$(awk -F- '{ print $1}' <<< ${_session})
+  CLASS_WEEKDAY=$(awk -F- '{ print $2}' <<< ${_session})
+    _hour="$(awk -F- '{ print $3}' <<< ${_session})"
+    _min="$(awk -F: '{ print $3}' <<< ${LOG_FILE})"
+  CLASS_TIME="${_hour}:${_min}"
+  CLASS_DATE=$(awk -F: '{ print $1}' <<< ${LOG_FILE})
+  DESCRIPTION=
+  PROMPT=
+  RECORDED_ATTENDEES=
+fi
+
+cat ${LOG_FILE}                   | 
+  awk -F, '{ print $5 }'          | 
+  sed 's/^rating='//              |
+  sed '/^-/d'                     |
+  sort -n > temp
+  while read _value ; do 
+     RATINGS+=( "$_value" )
+  done < temp
+
+_num_ratings=${#RATINGS_ARRAY[@]}
+_mid=$(( _num_ratings / 2 ))
+RATING_LOW=${RATINGS_ARRAY[0]}
+RATING_HIGH=${RATINGS_ARRAY[ $(( _num_ratings -1 )) ]}
+RATING_MEDIAN=${RATINGS_ARRAY[ ${_mid} ] }
+
+_sum=0
+for (( i=0; i < _num_ratings; i++ )) ; do
+  (( _sum = _sum + ${RATINGS_ARRAY[i]} ))
+done
+RATING_AVERAGE=$(( _sum / _num_ratings ))
+
+NUM_RESPONDENTS=$(sed -n '$=' ${LOG_FILE})
+ 
+cat ${LOG_FILE} | 
+  awk -F, '{ print $6 }' | 
+  sed -e 's/^response=//' -e '/^$/d' -e 's/+/ /g' > temp
+  while read _response ; do 
+     RESPONSES+=( "$_response" )
+  done < temp
+
+# Output the information into the log file
+cat > ${REPORT_FILE} <<EOF
+# Prepared Date: $(date)
+
+FILENAME=${REPORT_FILE}
+CLASS=${CLASS}
+CLASS_WEEKDAY=${CLASS_WEEKDAY}
+CLASS_TIME=${CLASS_TIME}
+CLASS_DATE=${CLASS_DATE}
+DESCRIPTION=
+PROMPT=${PROMPT}
+RECORDED_ATTENDEES=${RECORDED_ATTENDEES}
+
+# Above is potentially generated from input.html
+# Below is generated via the processing of the corresponding log
+
+RATING_AVERAGE=${RATING_AVERAGE}
+RATING_MEDIAN=${RATING_MEDIAN}
+RATING_LOW=${RATING_LOW}
+RATING_HIGH=${RATING_HIGH}
+
+EOF
+{
+  echo "RATINGS=("
+  for ((i=0; i< ${#RATINGS[@]}; i++)) ; do
+    echo "    \"${RATINGS[$i]}\""
+  done
+  echo ")"
+  echo
+  echo "NUM_RESPONDENTS=${NUM_RESPONDENTS}"
+  echo 
+  echo "# Note that  # of RESPONSES can be less than the number of NUM_RESPONDENTS"
+  echo "RESPONSES=("
+  for ((i=0; i< ${#RESPONSES[@]}; i++)) ; do
+    echo "    \"${RESPONSES[$i]}\""
+  done
+  echo ")"
+} >> ${REPORT_FILE}
+
