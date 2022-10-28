@@ -8,7 +8,7 @@
      - this could be the Prompt.
   1. Consider adding a low, and high scale mark  (and the stdev)
   1. Consider adding a graph showing the associated modes from the scale marks
-
+  1. Add the ability to add emojis for feedback, like party parrot
   
 ### Bugs
 
