@@ -82,11 +82,18 @@ cat <<EOF
    <div class="container"  style="text-align: center;">
       ${PNG_TITLE_DIV}
       <a href=https://www.csun.edu/~steve/participation/input.cgi>
-        <img  src="${PNG_FILE}" height="450" width="450"
+        <img  src="${PNG_FILE}" height="425" width="425"
         alt="A QR code to access the input.cgi script">
       </a>
   </div>
 EOF
+
+# Process any log reports from the last two sessions
+#  -- this should be done in a better way, but good enough for now.
+ls -t logs/*.log | sort -nr | head -2 | \
+  while read _log ; do
+     ./log2report  ${_log}
+  done
 ./report2html
 
 cat <<EOF
