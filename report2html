@@ -1,0 +1,84 @@
+#! /bin/bash
+
+# Start of report2html
+
+function summarize_lecture () {
+
+cat <<EOF
+<style>
+.frame {
+    overflow-y: auto;
+    border: 1px solid black;
+/*
+    line-height: 1em;
+*/
+}
+
+.frame::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.frame::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.frame::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+.frame::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: rgba(0, 0, 0, .5);
+}
+</style>
+<div>
+  <div>
+    <div comment="title">
+      ${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}<br>
+      ${CLASS_DATE}
+    </div>
+    <div comment="data summary">
+      <div comment="mean">Mean Rating: ${RATING_AVERAGE} </div>
+      <div comment="median">Median Rating: ${RATING_MEDIAN}</div>
+      <div comment="high">Highest Rating: ${RATING_HIGH}</div>
+      <div comment="low">Lowest Rating: ${RATING_LOW}</div>
+      <div comment="ratings">Ratings: ${RATINGS[@]}</div>
+      <div comment="respondents"># Respondents: ${RESONDENTS}</div>
+      <div comment="attendees"># Attendees: ${RECORDED_ATTENDEES}</div>
+    </div>
+  </div>
+
+  <div>
+    <div comment="description">
+      Today coverage: &lt;unspecified&gt;
+    </div>
+    <div comment="prompt">
+      Prompt: Provide general feedback to today's class.
+    </div>
+    <div comment="feedback-window" class="frame" style="height:150px;border-style: solid;overflow:auto;overflow-y:scroll;;padding:5px;">
+      <ul> 
+EOF
+
+for ((i=0; i < ${#RESPONSES[@]}; i++)) ; do
+  echo "<li> ${RESPONSES[$i]} </li>"
+done
+
+cat <<EOF
+      </ul>
+    </div>
+
+  </div>
+</div>
+EOF
+
+}
+
+
+
+
+ls -t reports/*.env|sort -nr |\
+  while read _report ; do
+    source $_report
+    summarize_lecture
+  done
