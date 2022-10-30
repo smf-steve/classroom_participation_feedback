@@ -2,8 +2,6 @@
 
 # Start of report2html
 
-function summarize_lecture () {
-
 cat <<EOF
 <style>
 .frame {
@@ -32,24 +30,35 @@ cat <<EOF
     background-color: rgba(0, 0, 0, .5);
 }
 </style>
+EOF
+
+function summarize_lecture () {
+
+
+cat <<EOF
+<div>
+  <div style="margin-left:15%"><hr width="85%"></div>
+<div>
 <div>
   <div>
     <div comment="title">
-      ${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}<br>
-      ${CLASS_DATE}
+      <div style="width:25%;float:left"><strong>${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</strong></div>
+      <div style="margin-left:25%">${CLASS_DATE}</div>
     </div>
-    <div comment="data summary">
+  </div>
+  <div style="width:25%;float:left">
+    <div comment="data summary" style="">
       <div comment="mean">Mean Rating: ${RATING_AVERAGE} </div>
       <div comment="median">Median Rating: ${RATING_MEDIAN}</div>
       <div comment="high">Highest Rating: ${RATING_HIGH}</div>
       <div comment="low">Lowest Rating: ${RATING_LOW}</div>
       <div comment="ratings">Ratings: ${RATINGS[@]}</div>
-      <div comment="respondents"># Respondents: ${RESONDENTS}</div>
+      <div comment="respondents"># Respondents: ${NUM_RESPONDENTS}</div>
       <div comment="attendees"># Attendees: ${RECORDED_ATTENDEES}</div>
     </div>
   </div>
 
-  <div>
+  <div style="margin-left:25%">
     <div comment="description">
       Today coverage: &lt;unspecified&gt;
     </div>
@@ -70,15 +79,18 @@ cat <<EOF
 
   </div>
 </div>
+<br>
 EOF
-
 }
-
-
-
 
 ls -t reports/*.env|sort -nr |\
   while read _report ; do
     source $_report
+    # Set the defualts for unspecified data
+
+    [[ -z ${DESCRIPTION} ]]        && DESCRIPTION=="&lt;unspecified&gl;"
+    [[ -z ${PROMPT} ]]             && PROMPT="Provide general feedback."
+    [[ -z ${RECORDED_ATTENDEES} ]] && RECORDED_ATTENDEES="---"
+
     summarize_lecture
   done
