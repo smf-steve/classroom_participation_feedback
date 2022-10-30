@@ -86,7 +86,14 @@ cat <<EOF
         alt="A QR code to access the input.cgi script">
       </a>
   </div>
+EOF
+./report2html
+
+cat <<EOF
 </body>
 </html>
 
 EOF
+
+
+
