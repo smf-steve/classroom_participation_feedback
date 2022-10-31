@@ -43,10 +43,10 @@ cat ${LOG_FILE}                   |
   awk -F, '{ print $5 }'          | 
   sed 's/^rating='//              |
   sed '/^-/d'                     |
-  sort -n > .$$.temp
+  sort -n > logs/.$$.temp
   while read _value ; do 
      RATINGS+=( "$_value" )
-  done < .$$.temp
+  done < logs/.$$.temp
 
 _num_ratings=${#RATINGS[@]}
 _mid=$(( _num_ratings / 2 ))
@@ -64,11 +64,11 @@ NUM_RESPONDENTS=$(sed -n '$=' ${LOG_FILE})
  
 cat ${LOG_FILE} | 
   awk -F, '{ print $6 }' | 
-  sed -f response_filter.sed > .$$.temp
+  sed -f response_filter.sed > logs/.$$.temp
   while read _response ; do 
      RESPONSES+=( "$_response" )
-  done < .$$.temp
-rm -f .$$.temp
+  done < logs/.$$.temp
+rm -f logs/.$$.temp
 
 # Output the information into the log file
 cat > ${REPORT_FILE} <<EOF
