@@ -14,7 +14,7 @@ else
     <div>
       <h3>$CLASS $CLASS_WEEKDAY @ $CLASS_TIME</h3>
       Feel free to provided feedback to today's class.
-    <div>"
+    </div>"
 
 fi
 
@@ -90,7 +90,14 @@ EOF
 
 # Process any log reports from the last two sessions
 #  -- this should be done in a better way, but good enough for now.
-ls -t logs/*.log | sort -nr | head -2 | \
+#
+# This is approach as opposed to a simple `ls` was required because
+# of the way CSUN's infrastructure works either because of security concerns
+# or a misconfigured filesystem.
+X=( $(echo logs/*.log) ) 
+for (( i=0; i< ${#X[@]} ; i++ )) ; do
+  echo ${X[$i]}
+done  | sort -nr | head -2 |
   while read _log ; do
      ./log2report  ${_log}
   done

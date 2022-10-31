@@ -38,7 +38,7 @@ function summarize_lecture () {
 cat <<EOF
 <div>
   <div style="margin-left:15%"><hr width="85%"></div>
-<div>
+</div>
 <div>
   <div>
     <div comment="title">
@@ -75,15 +75,21 @@ done
 
 cat <<EOF
       </ul>
-    </div>
+    </div comment="feedback-window">
 
-  </div>
+  </div comment="margin-left">
 </div>
 <br>
 EOF
 }
 
-ls -t reports/*.env|sort -nr |\
+# This is approach as opposed to a simple `ls` was required because
+# of the way CSUN's infrastructure works either because of security concerns
+# or a misconfigured filesystem.
+X=( $(echo reports/*.env) ) 
+for (( i=0; i< ${#X[@]} ; i++ )) ; do
+  echo ${X[$i]}
+done |sort -nr |\
   while read _report ; do
     source $_report
     # Set the defualts for unspecified data

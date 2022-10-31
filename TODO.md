@@ -10,7 +10,7 @@
        * See: https://www.tutorialspoint.com/html/html_url_encoding.htm
   1. Style, Style, Style
   1. Update not-in-session.png -- missing minor square
-  1. Determine why the CGI process is support slow on www.csun.edu
+  1. Determine why the CGI process is support slow on www.csun.edu -- solved!
   1. Determine if we need to delay the immediate publication on feedback
      - so far no issues, but what if something "inappropriate" is posted.
 
