@@ -93,11 +93,11 @@ EOF
 #
 # This is approach as opposed to a simple `ls` was required because
 # of the way CSUN's infrastructure works either because of security concerns
-# or a misconfigured filesystem.
+# or a misconfigured filesystem. Moreover, the command `head` is not present
 X=( $(echo logs/*.log) ) 
 for (( i=0; i< ${#X[@]} ; i++ )) ; do
   echo ${X[$i]}
-done  | sort -nr | head -2 |
+done  | sort -nr |sed -n '1,2p' |
   while read _log ; do
      ./log2report  ${_log}
   done
