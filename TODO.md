@@ -1,4 +1,6 @@
 ### Things to do
+  1. Restructure the filesystem for proper placement of public and nonpublic files
+
   1. Update the main page to allow the faculty member to record
      - what was dicussed in class
      - the prompt
