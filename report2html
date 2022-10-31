@@ -4,6 +4,29 @@
 
 cat <<EOF
 <style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 .frame {
     overflow-y: auto;
     border: 1px solid black;
@@ -52,7 +75,7 @@ cat <<EOF
       <div comment="median">Median Rating: ${RATING_MEDIAN}</div>
       <div comment="high">Highest Rating: ${RATING_HIGH}</div>
       <div comment="low">Lowest Rating: ${RATING_LOW}</div>
-      <div comment="ratings">Ratings: ${RATINGS[@]}</div>
+      <a href="#" data-toggle="tooltip" title="" data-original-title="${RATINGS[@]}">${RATING_LOW} ... ${RATING_HIGH}</a>
       <div comment="respondents"># Respondents: ${NUM_RESPONDENTS}</div>
       <div comment="attendees"># Attendees: ${RECORDED_ATTENDEES}</div>
     </div>
