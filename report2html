@@ -82,7 +82,7 @@ cat <<EOF
 
   <div style="margin-left:25%">
     <div comment="description">
-      Today coverage: &lt;unspecified&gt;
+      Class Coverage: ${DESCRIPTION}
     </div>
     <div comment="prompt">
       Prompt: Provide general feedback to today's class.
@@ -116,7 +116,7 @@ done |sort -nr |\
     source $_report
     # Set the defualts for unspecified data
 
-    [[ -z ${DESCRIPTION} ]]        && DESCRIPTION=="&lt;unspecified&gl;"
+    [[ -z ${DESCRIPTION} ]]        && DESCRIPTION="&lt;unspecified&gt;"
     [[ -z ${PROMPT} ]]             && PROMPT="Provide general feedback."
     [[ -z ${RECORDED_ATTENDEES} ]] && RECORDED_ATTENDEES="---"
 
