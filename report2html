@@ -71,13 +71,12 @@ cat <<EOF
   </div>
   <div style="width:25%;float:left">
     <div comment="data summary" style="">
-      <div comment="mean">Mean Rating: ${RATING_AVERAGE} </div>
-      <div comment="median">Median Rating: ${RATING_MEDIAN}</div>
-      <div comment="high">Highest Rating: ${RATING_HIGH}</div>
-      <div comment="low">Lowest Rating: ${RATING_LOW}</div>
-      <a href="#" data-toggle="tooltip" title="" data-original-title="${RATINGS[@]}">${RATING_LOW} ... ${RATING_HIGH}</a>
-      <div comment="respondents"># Respondents: ${NUM_RESPONDENTS}</div>
-      <div comment="attendees"># Attendees: ${RECORDED_ATTENDEES}</div>
+      <div>Mean Rating: ${RATING_AVERAGE} </div>
+      <div>Median Rating: ${RATING_MEDIAN}</div>
+      <div>Number of Ratings: ${#RATINGS[@]}</div>
+      <div>Range (low..high): <a href="#" data-toggle="tooltip" title="${RATINGS[@]}">${RATING_LOW}...${RATING_HIGH}</a></div>
+      <div># Respondents: ${NUM_RESPONDENTS}</div>
+      <div># Attendees: ${RECORDED_ATTENDEES}</div>
     </div>
   </div>
 
