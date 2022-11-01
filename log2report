@@ -39,11 +39,12 @@ else
   RECORDED_ATTENDEES=
 fi
 
-cat ${LOG_FILE}                   | 
+cat ${LOG_FILE}                   |
+  sed '/^ *#/d'                   |
   awk -F, '{ print $5 }'          | 
   sed 's/^rating='//              |
   sed '/^-/d'                     |
-  sort -n > logs/.$$.temp
+  sort -n                         > logs/.$$.temp
   while read _value ; do 
      RATINGS+=( "$_value" )
   done < logs/.$$.temp
@@ -62,8 +63,9 @@ RATING_AVERAGE=$(bc <<< "$_sum / $_num_ratings" )
 
 NUM_RESPONDENTS=$(sed -n '$=' ${LOG_FILE})
  
-cat ${LOG_FILE} | 
-  awk -F, '{ print $6 }' | 
+cat ${LOG_FILE}              | 
+  sed '/^ *#/d'              |
+  awk -F, '{ print $6 }'     | 
   sed -f response_filter.sed > logs/.$$.temp
   while read _response ; do 
      RESPONSES+=( "$_response" )
