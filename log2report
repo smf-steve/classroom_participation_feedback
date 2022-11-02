@@ -10,7 +10,10 @@ if [[ ! -f ${LOG_FILE} ]] ; then
   echo "  output is placed into file.env"
   exit 1
 fi
-FILE_NAME_BASE=$(basename -s .log ${LOG_FILE})
+
+# Do to yet another brain dead setup of the CSUN web infrastructure
+# FILE_NAME_BASE=$(basename -s .log ${LOG_FILE})
+FILE_NAME_BASE=$(sed -e 's|^.*/||' -e 's|\.log$||' <<< ${LOG_FILE} )
 REPORT_FILE=reports/${FILE_NAME_BASE}.env 
 
 if [[ -f ${REPORT_FILE} ]] ; then
@@ -59,7 +62,7 @@ _sum=0
 for (( i=0; i < _num_ratings; i++ )) ; do
   _sum=$(bc <<< "$_sum + ${RATINGS[$i]}" )
 done
-RATING_AVERAGE=$(bc <<< "$_sum / $_num_ratings" )
+RATING_AVERAGE=$(awk "{ print $_sum / $_num_ratings }" <<< "null" )
 
 NUM_RESPONDENTS=$(sed -n '$=' ${LOG_FILE})
  
