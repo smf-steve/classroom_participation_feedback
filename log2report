@@ -60,7 +60,7 @@ RATING_MEDIAN=${RATINGS[ ${_mid} ] }
 
 _sum=0
 for (( i=0; i < _num_ratings; i++ )) ; do
-  _sum=$(bc <<< "$_sum + ${RATINGS[$i]}" )
+  _sum=$(awk "{ print $_sum + ${RATINGS[$i]} }" <<< "null"  )
 done
 RATING_AVERAGE=$(awk "{ print $_sum / $_num_ratings }" <<< "null" )
 
