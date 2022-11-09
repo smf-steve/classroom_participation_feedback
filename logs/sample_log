@@ -13,6 +13,4 @@
 #   email: steve@my.csun.edu
 #   rating: 8
 #   response: I+have+no+feedback+for+today
-2022-10-13,15:34,COMP122-Thursday-2:00,email=steve%40my.csun.edu,rating=8,response=I+have+no+feedback+for+today
-2022-10-13,15:34,COMP122-Thursday-2:00,email=steve%40my.csun.edu,rating=8,response=:party_parrot:
-2022-11-01,9:49,COMP122-Tuesday-9:00,email=steve%40my.csun.edu,rating=-1,response=Prof+testing+the+support+of+%3Aparty_parrot%3A
+# 2022-10-13,15:34,COMP122-Thursday-2:00,email=steve%40my.csun.edu,rating=8,response=I+have+no+feedback+for+today
