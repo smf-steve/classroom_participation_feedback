@@ -30,9 +30,7 @@ cat <<EOF
 .frame {
     overflow-y: auto;
     border: 1px solid black;
-/*
-    line-height: 1em;
-*/
+    line-height: 16pt;
 }
 
 .frame::-webkit-scrollbar {
@@ -88,7 +86,7 @@ cat <<EOF
       Prompt: Provide general feedback to today's class.
     </div>
     <div comment="feedback-window" class="frame" style="height:150px;border-style: solid;overflow:auto;overflow-y:scroll;;padding:5px;">
-      <ul> 
+      <ol> 
 EOF
 
 for ((i=0; i < ${#RESPONSES[@]}; i++)) ; do
@@ -96,7 +94,7 @@ for ((i=0; i < ${#RESPONSES[@]}; i++)) ; do
 done
 
 cat <<EOF
-      </ul>
+      </ol>
     </div comment="feedback-window">
 
   </div comment="margin-left">
