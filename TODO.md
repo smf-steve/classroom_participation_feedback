@@ -23,6 +23,10 @@
   1. Add the ability to add emojis for feedback, like party parrot
   
 ### Bugs
+  1. the bc command is not on CSUN, need to find an alternative.
+  1. Should the 2:00 class appear before or after the 9:00 class... (i.e. sort by military time)
+  1. Heading Values (e.g., Prompt) should be bolded to allow them to stand out more
+  1. The Mean Rating seems to be broken in the last version of log2html 
   1. List of ratings can overflow the div.
      - can this be turned into a tool tip 
      - perhaps, it can be <div>Range: 3 4 ... 7 8</div>
