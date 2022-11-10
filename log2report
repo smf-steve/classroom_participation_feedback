@@ -22,6 +22,7 @@ if [[ -f ${REPORT_FILE} ]] ; then
   # Now reset the dynamic information 
   RATING_AVERAGE=
   RATING_MEDIAN=
+  RATING_MODE=
   RATING_LOW=
   RATING_HIGH=
   RATINGS=()
@@ -56,13 +57,14 @@ _num_ratings=${#RATINGS[@]}
 _mid=$(( _num_ratings / 2 ))
 RATING_LOW=${RATINGS[0]}
 RATING_HIGH=${RATINGS[ $(( _num_ratings -1 )) ]}
-RATING_MEDIAN=${RATINGS[ ${_mid} ] }
+RATING_MEDIAN=${RATINGS[${_mid}]}
 
 _sum=0
 for (( i=0; i < _num_ratings; i++ )) ; do
   _sum=$(awk "{ print $_sum + ${RATINGS[$i]} }" <<< "null"  )
 done
 RATING_AVERAGE=$(awk "{ print $_sum / $_num_ratings }" <<< "null" )
+RATING_MODE=
 
 NUM_RESPONDENTS=$(sed -n '$=' ${LOG_FILE})
  
@@ -93,6 +95,7 @@ RECORDED_ATTENDEES=${RECORDED_ATTENDEES}
 
 RATING_AVERAGE=${RATING_AVERAGE}
 RATING_MEDIAN=${RATING_MEDIAN}
+RATING_MODE=
 RATING_LOW=${RATING_LOW}
 RATING_HIGH=${RATING_HIGH}
 
