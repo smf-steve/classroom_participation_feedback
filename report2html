@@ -53,6 +53,49 @@ cat <<EOF
 </style>
 EOF
 
+_chart_id=0;
+function present_chart () {
+   (( chart_id++))
+
+cat <<EOF
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Number', 'Value', 'Median', 'Mean'],
+EOF
+for ((i=0; i< ${#RATINGS[@]} - 1; i++)) ; do
+    echo "['', ${RATINGS[i]}, ${RATING_MEDIAN}, ${RATING_AVERAGE} ],"
+done
+echo "['', ${RATINGS[i]},  ${RATING_MEDIAN}, ${RATING_AVERAGE} ]"
+
+cat <<EOF
+        ]);
+
+      var options = {
+          hAxis: {title: '${#RATINGS[@]} Ratings from 0..10'},
+          vAxis: {minValue: 0, maxValue: 10},
+          seriesType: 'bars',
+          legend: { position: 'none'},
+          series: { 1:{type: 'line'},
+                    2:{type: 'line'}}
+        };
+
+
+        var chart_${chart_id} = new google.visualization.ComboChart(document.getElementById('chart_${chart_id}'));
+        chart_${chart_id}.draw(data, options);
+      }
+    </script>
+    <div id="chart_${chart_id}" style="width: 200px; height: 200px;"></div>
+EOF
+
+}
+
+
+
 function summarize_lecture () {
 
 
@@ -63,29 +106,22 @@ cat <<EOF
 <div>
   <div>
     <div comment="title">
-      <div style="width:25%;float:left"><strong>${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</strong></div>
-      <div style="margin-left:25%">${CLASS_DATE}</div>
+      <div style="width:20%;float:left"><strong>${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</strong></div>
+      <div style="margin-left:20%">${CLASS_DATE}</div>
     </div>
   </div>
-  <div style="width:25%;float:left">
-    <div comment="data summary" style="">
-      <div>Mean Rating: ${RATING_AVERAGE} </div>
-      <div>Median Rating: ${RATING_MEDIAN}</div>
-      <div>Number of Ratings: ${#RATINGS[@]}</div>
-      <div>Range (low..high): <a href="#" data-toggle="tooltip" title="${RATINGS[@]}">${RATING_LOW}...${RATING_HIGH}</a></div>
-      <div># Respondents: ${NUM_RESPONDENTS}</div>
-      <div># Attendees: ${RECORDED_ATTENDEES}</div>
-    </div>
+  <div style="width:20%;float:left">
+EOF
+    present_chart
+cat <<EOF
   </div>
 
-  <div style="margin-left:25%">
+  <div style="margin-left:20%">
     <div comment="description">
       Class Coverage: ${DESCRIPTION}
     </div>
-    <div comment="prompt">
-      Prompt: Provide general feedback to today's class.
-    </div>
     <div comment="feedback-window" class="frame" style="height:150px;border-style: solid;overflow:auto;overflow-y:scroll;;padding:5px;">
+      Prompt: ${PROMPT}
       <ol> 
 EOF
 
@@ -99,7 +135,7 @@ cat <<EOF
 
   </div comment="margin-left">
 </div>
-<br>
+
 EOF
 }
 
@@ -115,7 +151,7 @@ done |sort -nr |\
     # Set the defualts for unspecified data
 
     [[ -z ${DESCRIPTION} ]]        && DESCRIPTION="&lt;unspecified&gt;"
-    [[ -z ${PROMPT} ]]             && PROMPT="Provide general feedback."
+    [[ -z ${PROMPT} ]]             && PROMPT="Provide general feedback to today's class."
     [[ -z ${RECORDED_ATTENDEES} ]] && RECORDED_ATTENDEES="---"
 
     summarize_lecture
