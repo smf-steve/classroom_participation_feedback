@@ -65,12 +65,13 @@ cat <<EOF
       function drawVisualization() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-          ['Number', 'Value', 'Median', 'Mean'],
+          ['Number', 'Value', 'Median', 'Mean', 'Mode'],
 EOF
-for ((i=0; i< ${#RATINGS[@]} - 1; i++)) ; do
-    echo "['', ${RATINGS[i]}, ${RATING_MEDIAN}, ${RATING_AVERAGE} ],"
+echo "['', 0,  ${RATING_MEDIAN}, ${RATING_AVERAGE}, ${RATING_MODE} ],"
+for ((i=0; i< ${#RATINGS[@]}; i++)) ; do
+    echo "['', ${RATINGS[i]}, ${RATING_MEDIAN}, ${RATING_AVERAGE}, ${RATING_MODE} ],"
 done
-echo "['', ${RATINGS[i]},  ${RATING_MEDIAN}, ${RATING_AVERAGE} ]"
+echo "['', 0,  ${RATING_MEDIAN}, ${RATING_AVERAGE}, ${RATING_MODE} ]"
 
 cat <<EOF
         ]);
@@ -81,7 +82,8 @@ cat <<EOF
           seriesType: 'bars',
           legend: { position: 'none'},
           series: { 1:{type: 'line'},
-                    2:{type: 'line'}}
+                    2:{type: 'line'},
+                    3:{type: 'line'}}
         };
 
 
@@ -104,36 +106,41 @@ cat <<EOF
   <div style="margin-left:15%"><hr width="85%"></div>
 </div>
 <div>
-  <div>
-    <div comment="title">
-      <div style="width:20%;float:left"><strong>${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</strong></div>
-      <div style="margin-left:20%">${CLASS_DATE}</div>
+    <div comment="header">
+        <div style="float:left"><strong>${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</strong></div>
+        <div style="margin-left:20%"> ${CLASS_DATE} Class Coverage: ${DESCRIPTION}</div>
+        <div style="float:right">Responses: ${NUM_RESPONDENTS}</div>
     </div>
-  </div>
-  <div style="width:20%;float:left">
+    <br>
+    <div style="width:20%;float:left">
 EOF
     present_chart
 cat <<EOF
-  </div>
-
-  <div style="margin-left:20%">
-    <div comment="description">
-      Class Coverage: ${DESCRIPTION}
     </div>
-    <div comment="feedback-window" class="frame" style="height:150px;border-style: solid;overflow:auto;overflow-y:scroll;;padding:5px;">
-      Prompt: ${PROMPT}
-      <ol> 
+
+    <div style="margin-left:20%">
+        <div comment="feedback-window" class="frame" style="height:200px;border-style: solid;overflow:auto;overflow-y:scroll;;padding:5px;">
+            Prompt: ${PROMPT}
+            <ol> 
 EOF
 
 for ((i=0; i < ${#RESPONSES[@]}; i++)) ; do
+
+  # This is a hack
+  IMAGE=$(sed -n '/<img/s|^.*images/\(.*\.gif\).*$|\1|p' <<< ${RESPONSES[$i]} )
+  if [ -n "$IMAGE" ] ; then
+    if [ ! -e images/$IMAGE ] ; then 
+      ln -s  images/_none.gif images/$IMAGE
+    fi
+  fi 
+
   echo "<li> ${RESPONSES[$i]} </li>"
 done
 
 cat <<EOF
-      </ol>
-    </div comment="feedback-window">
-
-  </div comment="margin-left">
+           </ol>
+        </div comment="feedback-window">
+    </div>
 </div>
 
 EOF
