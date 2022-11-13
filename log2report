@@ -64,7 +64,23 @@ for (( i=0; i < _num_ratings; i++ )) ; do
   _sum=$(awk "{ print $_sum + ${RATINGS[$i]} }" <<< "null"  )
 done
 RATING_AVERAGE=$(awk "{ print $_sum / $_num_ratings }" <<< "null" )
-RATING_MODE=
+
+RATING_MODE=${RATINGS[0]}
+mod_count=1
+num=${RATINGS[0]}
+count=1
+for ((i=1 ; i < ${#RATINGS[@]}; i++ )) ; do
+    if [[ $num != ${RATINGS[i]} ]] ; then
+      num=${RATINGS[i]} 
+      count=0
+    fi 
+    ((count++))
+    if (( count > mod_count )) ; then
+      RATING_MODE=$num
+      mod_count=$count
+    fi
+done
+
 
 NUM_RESPONDENTS=$(sed -n '$=' ${LOG_FILE})
  
@@ -95,7 +111,7 @@ RECORDED_ATTENDEES=${RECORDED_ATTENDEES}
 
 RATING_AVERAGE=${RATING_AVERAGE}
 RATING_MEDIAN=${RATING_MEDIAN}
-RATING_MODE=
+RATING_MODE=${RATING_MODE}
 RATING_LOW=${RATING_LOW}
 RATING_HIGH=${RATING_HIGH}
 
