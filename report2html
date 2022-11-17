@@ -77,7 +77,7 @@ cat <<EOF
         ]);
 
       var options = {
-          hAxis: {title: 'Median: ${RATING_MEDIAN}, Mean: ${RATING_AVERAGE}, Mode: ${RATING_MODE}'},
+          hAxis: {title: 'Median: ${RATING_MEDIAN}, Mean: ${RATING_AVERAGE}, Mode: ${RATING_MODE}, Count: ${#RATINGS[@]}' },
           vAxis: {minValue: 0, maxValue: 10},
           seriesType: 'bars',
           legend: { position: 'none'},
@@ -109,7 +109,7 @@ cat <<EOF
     <div comment="header">
         <div style="float:left"><strong>${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</strong></div>
         <div style="margin-left:20%"> ${CLASS_DATE} Class Coverage: ${DESCRIPTION}</div>
-        <div style="float:right">Responses: ${NUM_RESPONDENTS}</div>
+        <div style="float:right">Responses: ${NUM_RESPONDENTS}/${RECORDED_ATTENDEES}</div>
     </div>
     <br>
     <div style="width:20%;float:left">
@@ -156,10 +156,11 @@ done |sort -nr |\
   while read _report ; do
     source $_report
     # Set the defualts for unspecified data
-
+    # This section should be removed, after final testing.
+    # All reports should have this information automatically added.
     [[ -z ${DESCRIPTION} ]]        && DESCRIPTION="&lt;unspecified&gt;"
     [[ -z ${PROMPT} ]]             && PROMPT="Provide general feedback to today's class."
-    [[ -z ${RECORDED_ATTENDEES} ]] && RECORDED_ATTENDEES="---"
+    [[ -z ${RECORDED_ATTENDEES} ]] && RECORDED_ATTENDEES="--"
 
     summarize_lecture
   done
