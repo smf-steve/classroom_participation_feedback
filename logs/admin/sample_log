@@ -1,0 +1,16 @@
+# Sample Log File
+#
+# File Example: ./admin/report_initialation.log
+#
+#
+# Fields are comma (,) separated.
+# Filed names, with examples:
+#   Date: 2022-11-17
+#   Time: 11:20
+#   Class: COMP122
+#   Class_day: Thursday
+#   Class_time: 2:00
+#   description: Lab work on binary32
+#   prompt: Provide general feedback.
+#   attendees: 42
+# 2022-11-17,11:20,COMP122-Thursday-2:00,description=Lab+work+on+binary32,prompt=Provide+general-+feedback.,attendees=42
