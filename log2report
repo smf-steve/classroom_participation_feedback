@@ -11,7 +11,7 @@ if [[ ! -f ${LOG_FILE} ]] ; then
   exit 1
 fi
 
-# Do to yet another brain dead setup of the CSUN web infrastructure
+# Due to yet another brain dead setup of the CSUN web infrastructure
 # FILE_NAME_BASE=$(basename -s .log ${LOG_FILE})
 FILE_NAME_BASE=$(sed -e 's|^.*/||' -e 's|\.log$||' <<< ${LOG_FILE} )
 REPORT_FILE=reports/${FILE_NAME_BASE}.env 
