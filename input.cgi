@@ -98,15 +98,20 @@ content-Type: text/html
 
     <!-- Top of Page -->
     <div class="container">
-      <h2>Classroom Participation and Feedback System</h2>
-    </div>
-    <div class="container">
-      <h3>$CLASS $CLASS_WEEKDAY @ $CLASS_TIME</h3>
-    </div>
-    <div class="container">
-      <p>Today's Date: $(date)</p>
+      <h2>$CLASS $CLASS_WEEKDAY @ $CLASS_TIME</h3>
     </div>
 
+    <div class="container">
+      <p>Participation and Feedback<br>
+         Today's Date: $(date)</p>
+    </div>
+     <div class="container">
+         <label for="response_id" class="form-label">Class Coverage:</label>
+         <textarea class="form-control" id="response_id" rows="1" cols="80" name="response" readonly placeholder="${DESCRIPTION}"></textarea>
+     </div>
+    <div class="container">
+    <hr style="margin-bottom: 32px">
+    </div>
     <form action="./logger.cgi">
         <!-- Email box with label -->
       <div class="container">
@@ -123,7 +128,7 @@ content-Type: text/html
       <!-- Feedback text area with label -->
       <div class="container">
           <label for="response_id" class="form-label">Feedback:</label>
-          <textarea class="form-control" id="response_id" rows="6" cols="80" name="response" placeholder="Provide general feedback for today's class"></textarea>
+          <textarea class="form-control" id="response_id" rows="6" cols="80" name="response" placeholder="${PROMPT}"></textarea>
       </div>
 
       <!-- Submit buttons -->
