@@ -1,4 +1,5 @@
 .DS_Store
-logs/2022*
-reports/2022*
+logs/*.log
+reports/*.env
+logs/admin
 
