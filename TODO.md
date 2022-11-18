@@ -43,13 +43,19 @@
      - Default inputs should be provided in the Class Description
      - but when said information is provide, that saved information should be presented
      - consider put the prompt above the QR code.
+
+  1. index.cgi
+     - if you submit with nothing, then the placeholder inforamtion is wipped out.
+        - either
+         1. the placeholder information should be used,
+         1. the defaults should be placed back int.
   1. input.cgi
      - the font in the placeholder should be such that it is know that it is readonly
        i.e., already provided.
 
   1. after the submit, it should got to the index.cgi page, but at the href of today's info.
 
-
+   
 
 ### Refactor
   1. rewrite the protoype in an appropriate MVC web langauge
