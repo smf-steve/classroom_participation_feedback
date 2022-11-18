@@ -158,9 +158,9 @@ done |sort -nr |\
     # Set the defualts for unspecified data
     # This section should be removed, after final testing.
     # All reports should have this information automatically added.
-    [[ -z ${DESCRIPTION} ]]        && DESCRIPTION="&lt;unspecified&gt;"
-    [[ -z ${PROMPT} ]]             && PROMPT="Provide general feedback to today's class."
-    [[ -z ${RECORDED_ATTENDEES} ]] && RECORDED_ATTENDEES="--"
+    [[ -z "${DESCRIPTION}" ]]        && DESCRIPTION="&lt;unspecified&gt;"
+    [[ -z "${PROMPT}" ]]             && PROMPT="Provide general feedback to today's class."
+    [[ -z "${RECORDED_ATTENDEES}" ]] && RECORDED_ATTENDEES="--"
 
     summarize_lecture
   done
