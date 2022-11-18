@@ -6,6 +6,13 @@ if [[ $? != 0 ]]  ; then
   in_session=FALSE
 fi
 
+## If class is in session, then it should build the default
+## .env file.
+##
+## either via the submit
+## or by using the defaults -- which should be provided via participation.env
+
+
 if [[ $in_session == "FALSE" ]] ; then
   PNG_FILE="not-in-session.png"
 else
@@ -86,6 +93,27 @@ cat <<EOF
         alt="A QR code to access the input.cgi script">
       </a>
   </div>
+<form action="./init_report.cgi">
+  <div class="container">
+    <label for="description_id" class="form-label">Class Description:</label>
+    <textarea class="form-control" id="description_id" rows="3" cols="80" name="description" placeholder="${DESCRIPTION}"></textarea>
+  </div>
+  <div class="container">
+    <label for="prompt_id" class="form-label">Prompt:</label>
+    <textarea class="form-control" id="prompt_id" rows="1" cols="80" name="prompt" placeholder="${PROMPT}"></textarea>
+  </div>
+  <div class="container">
+    <label for="attendees_id" class="form-label" id="attendees">Number of Attendees</label>
+    <input type="number" class="form-control" id="attendees_id" name="attendees"  value="">
+  </div>
+  <!-- Submit buttons -->
+  <div class="container">
+    <button type="submit" id="dark" class="btn btn-outline-dark" value="Submit">Submit</button>
+  </div>
+  <div class="container">
+    <button type="submit" id="light" class="visually-hidden" value="Submit">Submit</button>
+  </div>
+</form>
 EOF
 
 # Process any log reports from the last two sessions
