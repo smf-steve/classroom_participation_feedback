@@ -112,6 +112,7 @@ content-Type: text/html
     <div class="container">
     <hr style="margin-bottom: 32px">
     </div>
+
     <form action="./logger.cgi">
         <!-- Email box with label -->
       <div class="container">
@@ -121,15 +122,18 @@ content-Type: text/html
 
       <!-- Range slider with label -->
       <div class="container">
-          <label for="rating_id" class="form-label">Value of Today's Class (0=low ... 10=high):</label>
+          <label for="rating_id" class="form-label">Overall Ratings for Today's Class (0=low ... 10=high):</label>
           <input type="range" class="form-label" id="rating_id" name="rating" min="-1" value="-1" max="10" step="0.5">
       </div>
 
+
       <!-- Feedback text area with label -->
       <div class="container">
-          <label for="response_id" class="form-label">Feedback:</label>
-          <textarea class="form-control" id="response_id" rows="6" cols="80" name="response" placeholder="${PROMPT}"></textarea>
+          <label for="response_id" class="form-label">Prompt: ${PROMPT}</label>
+          <textarea class="form-control" id="response_id" rows="6" cols="80" name="response" placeholder=
+          "Either provide general feedback or provided a response to the prompt."></textarea>
       </div>
+
 
       <!-- Submit buttons -->
       <div class="container">
