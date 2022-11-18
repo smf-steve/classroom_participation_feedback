@@ -34,6 +34,23 @@
        - then use a tool tip to allow the user to see them all
        - perhaps a graph would be better or make this range obsolete 
 
+  1. The Class Description should be placed into readonly textarea... ?
+     Ditto for the feedback
+     This will unify the way it looks?
+  1. in dark mode, the slide rang is not apparent
+     - should the slide provide the value selected. 
+  1. index.cgi : individual class information
+     - Default inputs should be provided in the Class Description
+     - but when said information is provide, that saved information should be presented
+     - consider put the prompt above the QR code.
+  1. input.cgi
+     - the font in the placeholder should be such that it is know that it is readonly
+       i.e., already provided.
+
+  1. after the submit, it should got to the index.cgi page, but at the href of today's info.
+
+
+
 ### Refactor
   1. rewrite the protoype in an appropriate MVC web langauge
   1. Create a QR code on the fly with an embedded code 
