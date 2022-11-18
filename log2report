@@ -97,14 +97,14 @@ rm -f logs/.$$.temp
 cat > ${REPORT_FILE} <<EOF
 # Prepared Date: $(date)
 
-FILE_NAME=${REPORT_FILE}
-CLASS=${CLASS}
-CLASS_WEEKDAY=${CLASS_WEEKDAY}
-CLASS_TIME=${CLASS_TIME}
-CLASS_DATE=${CLASS_DATE}
+FILE_NAME="${REPORT_FILE}"
+CLASS="${CLASS}"
+CLASS_WEEKDAY="${CLASS_WEEKDAY}"
+CLASS_TIME="${CLASS_TIME}"
+CLASS_DATE="${CLASS_DATE}"
 DESCRIPTION="${DESCRIPTION}"
-PROMPT=${PROMPT}
-RECORDED_ATTENDEES=${RECORDED_ATTENDEES}
+PROMPT="${PROMPT}"
+RECORDED_ATTENDEES="${RECORDED_ATTENDEES}"
 
 # Above is potentially generated from input.html
 # Below is generated via the processing of the corresponding log
