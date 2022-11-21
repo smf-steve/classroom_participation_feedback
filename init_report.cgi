@@ -6,7 +6,7 @@
 #   1. Source the environment
 #      - Obtain date and time information
 #      - Lookup Class information based upon WEEKDAY and Current Time
-#      - define: CLASS, CLASS_WEEKDAY, CLASS_TIME
+#      - define: CLASS, CLASS_DAYS, CLASS_WEEKDAY, CLASS_TIME
 #      - determine not in session -- exit will occur
 #
 #   1. Validate Form Data  (note form uses lowercase, and env uses uppercase)

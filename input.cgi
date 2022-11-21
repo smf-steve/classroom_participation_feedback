@@ -4,7 +4,7 @@
 #   1. Source the environment
 #      - Obtain date and time information
 #      - Lookup Class information based upon WEEKDAY and Current Time
-#      - define: CLASS, CLASS_WEEKDAY, CLASS_TIME
+#      - define: CLASS, CLASS_DAYS, CLASS_WEEKDAY, CLASS_TIME
 #      - determine not in session -- exit will occur
 #
 #   1. Present Form Data
@@ -98,7 +98,7 @@ content-Type: text/html
 
     <!-- Top of Page -->
     <div class="container">
-      <h2>$CLASS $CLASS_WEEKDAY @ $CLASS_TIME</h3>
+      <h2>${CLASS} ${CLASS_DAYS} @ ${CLASS_TIME}</h3>
     </div>
 
     <div class="container">

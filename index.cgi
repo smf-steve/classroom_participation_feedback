@@ -19,7 +19,7 @@ else
   PNG_FILE="qr-code.png"
   PNG_TITLE_DIV="
     <div>
-      <h3>$CLASS $CLASS_WEEKDAY @ $CLASS_TIME</h3>
+      <h3>${CLASS} ${CLASS_DAYS} @ ${CLASS_TIME}</h3>
       Feel free to provided feedback to today's class.
     </div>"
 
