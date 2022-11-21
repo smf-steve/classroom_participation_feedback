@@ -11,33 +11,21 @@
        * Published feedback: lots of info provided, need to review to understand completely
        * See: https://www.tutorialspoint.com/html/html_url_encoding.htm
   1. Style, Style, Style
-  1. Update not-in-session.png -- missing minor square
-  1. Determine why the CGI process is support slow on www.csun.edu -- solved!
+
   1. Determine if we need to delay the immediate publication on feedback
      - so far no issues, but what if something "inappropriate" is posted.
 
 ### Features
-  1. Add a summary field by the faculty member indicate what was dicussed in class.
-     - this could be the Prompt.
-  1. Consider adding a graph showing the associated modes from the scale marks
   1. Add the ability to add emojis for feedback, like party parrot
   
 ### Bugs
-  1. the bc command is not on CSUN, need to find an alternative.
   1. Should the 2:00 class appear before or after the 9:00 class... (i.e. sort by military time)
   1. Heading Values (e.g., Prompt) should be bolded to allow them to stand out more
-  1. The Mean Rating seems to be broken in the last version of log2html 
-  1. List of ratings can overflow the div.
-     - can this be turned into a tool tip 
-     - perhaps, it can be <div>Range: 3 4 ... 7 8</div>
-       - just showing the two lowest and the two highest
-       - then use a tool tip to allow the user to see them all
-       - perhaps a graph would be better or make this range obsolete 
 
   1. The Class Description should be placed into readonly textarea... ?
      Ditto for the feedback
      This will unify the way it looks?
-  1. in dark mode, the slide rang is not apparent
+  1. in dark mode, the slide range is not apparent
      - should the slide provide the value selected. 
   1. index.cgi : individual class information
      - Default inputs should be provided in the Class Description
