@@ -4,7 +4,7 @@
 #   1. Source the environment
 #      - Obtain date and time information
 #      - Lookup Class information based upon WEEKDAY and Current Time
-#      - define: CLASS, CLASS_DAYS, CLASS_WEEKDAY, CLASS_TIME
+#      - define: CLASS, CLASS_DAYS, CLASS_WEEKDAY, CLASS_TIME, CLASS_24TIME
 #      - determine not in session -- exit will occur
 #
 #   1. Present Form Data
@@ -26,7 +26,7 @@ fi
 
 
 cat <<EOF
-x-participation-info: $CLASS $CLASS_WEEKDAY $CLASS_TIME
+x-participation-info: ${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}
 x-participation-date: $(date)
 content-Type: text/html
 

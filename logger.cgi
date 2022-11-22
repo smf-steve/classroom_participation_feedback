@@ -6,7 +6,7 @@
 #   1. Source the environment
 #      - Obtain date and time information
 #      - Lookup Class information based upon WEEKDAY and Current Time
-#      - define: CLASS, CLASS_DAYS, CLASS_WEEKDAY, CLASS_TIME
+#      - define: CLASS, CLASS_DAYS, CLASS_WEEKDAY, CLASS_TIME, CLASS_24TIME
 #      - determine not in session -- exit will occur
 #
 #   1. Validate Form Data
@@ -15,7 +15,7 @@
 #      - Feedback/response
 #
 #   1. Log the information
-#      logname: logs/$CLASS-$CLASS_WEEKDAY-$CLASS_TIME:$MONTH-$DAY
+#      logname: logs/$CLASS-$CLASS_WEEKDAY-$CLASS_24TIME:$MONTH-$DAY
 #
 #   1. Return Thank you page
 
@@ -31,12 +31,12 @@ EOF
   exit 0;
 fi
 
-LOG_FILE=logs/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME.log
+LOG_FILE=logs/${FULL_DATE}:${CLASS}-${CLASS_WEEKDAY}-${CLASS_24TIME}.log
 
 
 # Create the log information
 { 
-   echo -n $FULL_DATE,$HOUR:$MINUTE,$CLASS-$CLASS_WEEKDAY-$CLASS_TIME,
+   echo -n ${FULL_DATE},${HOUR}:${MINUTE},${CLASS}-${CLASS_WEEKDAY}-${CLASS_24TIME},
 
    # If there is a Query String,
    # emit the "&" separated components onto a separate line.
@@ -50,7 +50,7 @@ LOG_FILE=logs/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME.log
 } | sed 's/,$//' >> $LOG_FILE
 
 cat <<-EOF
-x-participation-info: $CLASS $CLASS_WEEKDAY $CLASS_TIME
+x-participation-info: $CLASS $CLASS_WEEKDAY $CLASS_24TIME
 x-participation-date: $(date)
 location: ./recorded.html
 

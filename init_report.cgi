@@ -6,7 +6,7 @@
 #   1. Source the environment
 #      - Obtain date and time information
 #      - Lookup Class information based upon WEEKDAY and Current Time
-#      - define: CLASS, CLASS_DAYS, CLASS_WEEKDAY, CLASS_TIME
+#      - define: CLASS, CLASS_DAYS, CLASS_WEEKDAY, CLASS_TIME, CLASS_24TIME
 #      - determine not in session -- exit will occur
 #
 #   1. Validate Form Data  (note form uses lowercase, and env uses uppercase)
@@ -32,7 +32,7 @@ EOF
 fi
 
 ADMIN_LOG_FILE=./logs/admin/report_initialization.log
-REPORT_FILE=./reports/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME.env
+REPORT_FILE=./reports/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_24TIME.env
 
 # Extract values from the query string
 if [[ -n "${QUERY_STRING}" ]] ; then 
@@ -56,7 +56,7 @@ fi
 
 # Create the log information
 { 
-   echo -n $FULL_DATE,$HOUR:$MINUTE,$CLASS-$CLASS_WEEKDAY-$CLASS_TIME,
+   echo -n ${FULL_DATE},${HOUR}:${MINUTE},${CLASS}-${CLASS_WEEKDAY}-$CLASS_24TIME,
 
    # If there is a Query String,
    # emit the "&" separated components onto a separate line.
@@ -70,7 +70,7 @@ fi
 } | sed 's/,$//' >> $ADMIN_LOG_FILE
 
 cat <<-EOF
-x-participation-info: $CLASS $CLASS_WEEKDAY $CLASS_TIME
+x-participation-info: ${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}
 x-participation-date: $(date)
 location: ./index.html
 
@@ -80,17 +80,17 @@ EOF
 cat > ${REPORT_FILE} <<-EOF
 # Prepared Date: $(date)
 
-FILE_NAME=${FULL_DATE}:$CLASS-$CLASS_WEEKDAY-$CLASS_TIME.env
-CLASS=${CLASS}
-CLASS_WEEKDAY=${CLASS_WEEKDAY}
-CLASS_TIME=${CLASS_TIME}
-CLASS_DATE=${FULL_DATE}
+FILE_NAME="${FULL_DATE}:${CLASS}-${CLASS_WEEKDAY}-${CLASS_24TIME}.env"
+CLASS="${CLASS}"
+CLASS_WEEKDAY="${CLASS_WEEKDAY}"
+CLASS_TIME="${CLASS_TIME}"
+CLASS_24TIME="${CLASS_24TIME}"
+CLASS_DATE="${FULL_DATE}"
 DESCRIPTION="${DESCRIPTION}"
 PROMPT="${PROMPT}"
 RECORDED_ATTENDEES="${RECORDED_ATTENDEES}"
 
 EOF
-
 
 
 exit 0

@@ -11,8 +11,7 @@ if [[ ! -f ${LOG_FILE} ]] ; then
   exit 1
 fi
 
-# Due to yet another brain dead setup of the CSUN web infrastructure
-# FILE_NAME_BASE=$(basename -s .log ${LOG_FILE})
+
 FILE_NAME_BASE=$(sed -e 's|^.*/||' -e 's|\.log$||' <<< ${LOG_FILE} )
 REPORT_FILE=reports/${FILE_NAME_BASE}.env 
 
@@ -29,15 +28,27 @@ if [[ -f ${REPORT_FILE} ]] ; then
   NUM_RESPONDENTS=
   RESPONSES=()
 else
-  # define the Header values
+  # This session should be effectively dead now... since the report is created upon
+  # inital load of input.cgi
+
+  # Define the Header values
+  #   FILE_NAME_BASE SYNTAX:  $FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_24TIME
   FILE_NAME=${REPORT_FILE}
-    _session=$(awk -F: '{ print $2}'    <<< ${FILE_NAME_BASE})
-  CLASS=$(awk -F- '{ print $1}'           <<< ${_session})
-  CLASS_WEEKDAY=$(awk -F- '{ print $2}'   <<< ${_session})
-    _hour="$(awk -F- '{ print $3}'     <<< ${_session})"
-    _min="$(awk -F: '{ print $3}'      <<< ${FILE_NAME_BASE})"
-  CLASS_TIME="${_hour}:${_min}"
+
   CLASS_DATE=$(awk -F: '{ print $1}'   <<< ${FILE_NAME_BASE})
+
+  _session=$(awk -F: '{ print $2}'    <<< ${FILE_NAME_BASE})
+     CLASS=$(awk -F- '{ print $1}'           <<< ${_session})
+     CLASS_WEEKDAY=$(awk -F- '{ print $2}'   <<< ${_session})
+     CLASS_24TIME=$(awk -F- '{ print $3}'    <<< ${_session})
+
+    _hour="$(sed 's/\(.*\)\(..\)$/\1/'       <<< ${CLASS_24TIME})"
+    _min="$(sed  's/\(.*\)\(..\)$/\2/'       <<< ${CLASS_24TIME})"
+    if (( _hour > 12 )) ; then
+      (( _hour = _hour - 12 ))
+    fi
+  CLASS_TIME="${_hour}:${_min}"
+
   DESCRIPTION=
   PROMPT=
   RECORDED_ATTENDEES=
@@ -101,6 +112,7 @@ FILE_NAME="${REPORT_FILE}"
 CLASS="${CLASS}"
 CLASS_WEEKDAY="${CLASS_WEEKDAY}"
 CLASS_TIME="${CLASS_TIME}"
+CLASS_24TIME="${CLASS_24TIME}"
 CLASS_DATE="${CLASS_DATE}"
 DESCRIPTION="${DESCRIPTION}"
 PROMPT="${PROMPT}"
