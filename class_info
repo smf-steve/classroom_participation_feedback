@@ -1,21 +1,27 @@
 # Class information
 #
-# First three columns identifies a class session
-#   - Class_Start is used to human readable value for Output
-# Last two columns define the timeframe for feedback (FB)
-#   - the FB_BEGIN and FB_END time must be military time
-#    
+# First four columns identifies a class 
+#   - CLASS: Catalog Name and Catalog Number
+#   - CLASS_DAYS: Does of a week in which the class meets
+#   - CLASS_TIME: The time the class starts -- via a 12 clock
+#   - CLASS_24TIME: The time the class starts -- via a 24 clock
+# 
+# Last three columns define when the Feedback (FB) system is active for a particular class.
+#   * These three values serve as the candidate key for the class information
+#   - FB_WEEKDAY: The day of the week for information to be collected
+#   - FB_BEGIN:   The time, within a 24 clock, to begin collecting information
+#   - FB_END:     The time, within a 24 clock, to step collecting information
 #
-# CLASS     DAYS    CLASS_START   FB_WEEKDAY     FB_BEGIN  	FB_END
-COMP122     M/W     9:00          Monday         900   	1050
-COMP122     M/W     2:00          Monday         1400  	1550
-COMP122     M/W     9:00          Wednesday      900   	1050
-COMP122     M/W     2:00          Wednesday      1400  	1550
-COMP122     T/R     9:00          Tuesday        900   	1050
-COMP122     T/R     2:00          Tuesday        1400  	1550
-COMP122     T/R     9:00          Thursday       900   	1050
-COMP122     T/R     2:00          Thursday       1400  	1550
-Mon_TEST    M       2:00          Monday         0     	2400
-Tue_TEST    T       2:00          Tuesday        0     	2400
-Wed_TEST    W       2:00          Wednesday      0     	2400
-Thur_TEST   R       2:00          Thursday       0     	2400
+# CLASS     CLASS_DAYS  CLASS_TIME   CLASS_24_TIME   FB_WEEKDAY     FB_BEGIN  	FB_END
+COMP122     M/W         9:00         900             Monday         900   	1050
+COMP122     M/W         2:00         1400            Monday         1400  	1550
+COMP122     M/W         9:00         900             Wednesday      900   	1050
+COMP122     M/W         2:00         1400            Wednesday      1400  	1550
+COMP122     T/R         9:00         900             Tuesday        900   	1050
+COMP122     T/R         2:00         1400            Tuesday        1400  	1550
+COMP122     T/R         9:00         900             Thursday       900   	1050
+COMP122     T/R         2:00         1400            Thursday       1400  	1550
+Mon_TEST    M/R         2:00         900             Monday         0000     	2400
+Tue_TEST    T           2:00         1400            Tuesday        0000     	2400
+Wed_TEST    W           2:00         900             Wednesday      0000     	2400
+Thur_TEST   R           2:00         1400            Thursday       0000     	2400
