@@ -22,40 +22,48 @@
     background-color: rgba(0, 0, 0, .5);
 }
 
-        .container textarea{
-          resize: none;
-          font-family: sans-serif;
-        }
-        .container{
-          font-family: sans-serif;
-          margin-bottom: 1.2em;
-        }
-        h2{
-          margin-top: 1%;
-        }
-        #rating_id{
-          width: 50%;
-        }
-        #sun{
-          margin-left: 85%;
-          background-color: transparent;
-          background-repeat: no-repeat;
-          border: none;
-          outline: none;
-        }
-        #moon{
-          margin-left: 85%;
-          background-color: transparent;
-          background-repeat: no-repeat;
-          border: none;
-          outline: none;
-        }
-        #sun:hover{
-          background-color: gray;
-        }
-        #moon:hover{
-          background-color: #777;
-        }
-        .form-label{
-          display: block;
-        }
+.container textarea{
+  resize: none;
+  font-family: sans-serif;
+}
+
+.container{
+  font-family: sans-serif;
+  margin-bottom: 1.2em;
+}
+
+h2{
+  margin-top: 1%;
+}
+
+#rating_id{
+  width: 50%;
+}
+
+#sun{
+  margin-left: 85%;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+}
+
+#moon{
+  margin-left: 85%;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  outline: none;
+}
+
+#sun:hover{
+  background-color: gray;
+}
+
+#moon:hover{
+  background-color: #777;
+}
+
+.form-label{
+  display: block;
+}

@@ -36,47 +36,9 @@ cat <<EOF
 
       <!-- CSS CDN -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <link href="css/participation.css">
 
-      <style>
-        .container textarea{
-          resize: none;
-          font-family: sans-serif;
-        }
-        .container{
-          font-family: sans-serif;
-          margin-bottom: 1.2em;
-        }
-        h2{
-          margin-top: 1%;
-        }
-        #rating_id{
-          width: 50%;
-        }
-        #sun{
-          margin-left: 85%;
-          background-color: transparent;
-          background-repeat: no-repeat;
-          border: none;
-          outline: none;
-        }
-        #moon{
-          margin-left: 85%;
-          background-color: transparent;
-          background-repeat: no-repeat;
-          border: none;
-          outline: none;
-        }
-        #sun:hover{
-          background-color: gray;
-        }
-        #moon:hover{
-          background-color: #777;
-        }
-        .form-label{
-          display: block;
-        }
-      </style>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   </head>
 
 
