@@ -48,7 +48,10 @@
 
   1. Modify username to be github account or @my.csun.edu
 
+  1. update tags to be valid XHTML, e.g., <input  > ==> <input />
 
+  1. Mode is not technically correct
+     - The mode is a set of values.  All values within the set have the same number of occurrances.  As such, if all values are mutually exclusive the MODE is the universal set.  We have set it to Zero.
 
 participation/  (Draw this up)
    start  <-- provides QR codel, input for prompts, links to other pages
