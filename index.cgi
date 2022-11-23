@@ -19,7 +19,7 @@ else
   PNG_FILE="qr-code.png"
   PNG_TITLE_DIV="
     <div>
-      <h3>${CLASS} ${CLASS_DAYS} @ ${CLASS_TIME}</h3>
+      <h3>${CLASS} ${CLASS_WEEKDAY} @ ${CLASS_TIME}</h3>
       Feel free to provided feedback to today's class.
     </div>"
 
@@ -32,7 +32,7 @@ cat <<EOF
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Classroom Participation and Feedback System</title>
+      <title>Participation and Feedback</title>
 
       <!-- CSS CDN -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -83,7 +83,7 @@ cat <<EOF
 <body class="text-bg-light p-3" id="body">
   
    <div class="container">
-      <h2>Classroom Participation and Feedback System</h2>
+      <h2>Participation and Feedback</h2>
    </div>
    <br>
    <div class="container"  style="text-align: center;">
