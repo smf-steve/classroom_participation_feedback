@@ -69,12 +69,6 @@ fi
    echo
 } | sed 's/,$//' >> $ADMIN_LOG_FILE
 
-cat <<-EOF
-x-participation-info: ${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}
-x-participation-date: $(date)
-location: ./index.html
-
-EOF
 
 # Create/Recreate the initial report file
 cat > ${REPORT_FILE} <<-EOF
@@ -92,5 +86,12 @@ RECORDED_ATTENDEES="${RECORDED_ATTENDEES}"
 
 EOF
 
+
+cat <<-EOF
+x-participation-info: ${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}
+x-participation-date: $(date)
+location: ./index.cgi
+
+EOF
 
 exit 0
