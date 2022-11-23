@@ -98,7 +98,7 @@ content-Type: text/html
 
     <!-- Top of Page -->
     <div class="container">
-      <h2>${CLASS} ${CLASS_DAYS} @ ${CLASS_TIME}</h3>
+      <h2>${CLASS} ${CLASS_WEEKDAY} @ ${CLASS_TIME}</h3>
     </div>
 
     <div class="container">
