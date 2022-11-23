@@ -52,7 +52,7 @@ LOG_FILE=logs/${FULL_DATE}:${CLASS}-${CLASS_WEEKDAY}-${CLASS_24TIME}.log
 cat <<-EOF
 x-participation-info: $CLASS $CLASS_WEEKDAY $CLASS_24TIME
 x-participation-date: $(date)
-location: ./recorded.html
+location: ./recorded.cgi
 
 EOF
 
