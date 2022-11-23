@@ -69,8 +69,12 @@ if (( _num_ratings > 0 )) ; then
   _mid=$(( _num_ratings / 2 ))
   RATING_LOW=${RATINGS[0]}
   RATING_HIGH=${RATINGS[ $(( _num_ratings -1 )) ]}
-  RATING_MEDIAN=${RATINGS[${_mid}]}
 
+  if (( _num_ratings % 2 != 0  )) ; then 
+     RATING_MEDIAN=${RATINGS[${_mid}]}
+  else
+     RATING_MEDIAN=$(awk "{ print (${RATINGS[$((_mid -1))]} + ${RATINGS[${_mid}]}) / 2 }"  <<< "null" )
+  fi
 
   _sum=0
   for (( i=0; i < _num_ratings; i++ )) ; do
@@ -78,11 +82,11 @@ if (( _num_ratings > 0 )) ; then
   done
   RATING_AVERAGE=$(awk "{ print $_sum / $_num_ratings }" <<< "null" )
   
-  RATING_MODE=${RATINGS[0]}
-  mod_count=1
+  RATING_MODE="0"
+  mod_count=0
   num=${RATINGS[0]}
-  count=1
-  for ((i=1 ; i < ${#RATINGS[@]}; i++ )) ; do
+  count=0
+  for ((i=0 ; i < ${#RATINGS[@]}; i++ )) ; do
       if [[ $num != ${RATINGS[i]} ]] ; then
         num=${RATINGS[i]} 
         count=0
