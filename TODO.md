@@ -5,18 +5,69 @@
      - what was dicussed in class
      - the prompt
      - the number of students attended
+
   1. Determine what other types of re-encoding needs to be performed on student responses
      - For example:
        * Student feedback: lots of info provided%2C need to review to understand completely
        * Published feedback: lots of info provided, need to review to understand completely
        * See: https://www.tutorialspoint.com/html/html_url_encoding.htm
-  1. Style, Style, Style
+  1. Add the ability to add emojis for feedback, like party parrot
+
 
   1. Determine if we need to delay the immediate publication on feedback
      - so far no issues, but what if something "inappropriate" is posted.
 
+  1. Update the init_report.cgi to require authentication
+
+### Presentation and CSS 
+  1. Put a repo link on the index.html page
+  1. fix rendering boxes for bottom of page (index.cgi)
+
+  1. move css to a file
+
+  1. put in href for current class?
+     -  <p id=news>
+     -  <a href="#news">Go</a>
+  1. modify the text of the placeholder
+
+  1. modify the text of the Class Coverage placeholder to render not as a place holder
+     ```css
+       ::placeholder {
+            color: red;
+         }
+     ```
+
+  1. put in autofill of email on input.cgi
+     - <input id="user-text-field" type="email" autocomplete="username"/>
+     - <input id="password-text-field" type="password" autocomplete="current-password"/>
+
+
+  1. put in autofill of email/password for index.cgi
+     - these allowing security for prompt setting to work
+
+
+  1. Modify username to be github account or @my.csun.edu
+
+
+
+participation/  (Draw this up)
+   start  <-- provides QR codel, input for prompts, links to other pages
+        <QR Code>  <current-class>
+   info  < the bottom half of the current index.html
+      current-class
+      this weeks class
+      past classes
+   input < as is
+
+   thankyou page --> info pag
+       current-class, with autorefresh
+
+   out of -session page -> info page full
+
+
+### Documentation
+
 ### Features
-  1. Add the ability to add emojis for feedback, like party parrot
   
 ### Bugs
   1. Should the 2:00 class appear before or after the 9:00 class... (i.e. sort by military time)
@@ -51,19 +102,10 @@
      1. to limit spruious usage of the system
      1. to encode class session information (reduce the number of fields to post)
 
-### Presentation
-  1. Put a repo link on the index.html page
 
-### Exploration
-  1. Determine if an .htaccess file can
-     1. allow users to authenticate with their @my.csun.edu address
-        1. ensure that their authentication can be cached
-  1. Consider a login button to allow the faculty member 
-     1. to modify a prompt on the fly
-     1. to record number of students in attendence.
-  1. Determine if the registered number of students should be presented on the page
-     - then the number of attendees have some mean as to 70% - 80%, etc.
-
+### Future Feature Consideration
+  1. Faculty member wants students to authenticate
+     - allow authentication via their @my.csune.du address
 
 
 
