@@ -47,11 +47,13 @@ content-Type: text/html
 EOF
 
 # If this program is called in the proper order, then both the LOG_FILE and REPORT_FILE should exist.
-[ ! -f  ${LOG_FILE} ] && exit 1
-[ ! -f ${REPORT_FILE} ] && exit 1
+if [[ -f  ${LOG_FILE} ]] ; then
+  ./log2report ${LOG_FILE} 
+fi
 
-./log2report ${LOG_FILE}
-./report2html ${REPORT_FILE}
+if [[ -f ${REPORT_FILE} ]] ; then 
+  ./report2html ${REPORT_FILE}
+fi
 
 cat <<EOF
 </body>
