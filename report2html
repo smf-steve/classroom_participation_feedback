@@ -1,6 +1,14 @@
 #! /bin/bash
 
 # Start of report2html
+#
+# Usage: report2html
+#   -- prints all of the reports
+#
+# Usage: report2html report
+#  -- prints out just that particular report
+
+_report="$1"
 
 cat <<EOF
 <style>
@@ -99,7 +107,15 @@ EOF
 
 
 function summarize_lecture () {
+  _report="$1"
 
+  source $_report
+  # Set the defualts for unspecified data
+  # This section should be removed, after final testing.
+  # All reports should have this information automatically added.
+  [[ -z "${DESCRIPTION}" ]]        && DESCRIPTION="&lt;unspecified&gt;"
+  [[ -z "${PROMPT}" ]]             && PROMPT="Provide general feedback to today's class."
+  [[ -z "${RECORDED_ATTENDEES}" ]] && RECORDED_ATTENDEES="--"
 
 cat <<EOF
 <div>
@@ -149,18 +165,15 @@ EOF
 # This is approach as opposed to a simple `ls` was required because
 # of the way CSUN's infrastructure works either because of security concerns
 # or a misconfigured filesystem.
-X=( $(echo reports/*.env) ) 
-for (( i=0; i< ${#X[@]} ; i++ )) ; do
-  echo ${X[$i]}
-done |sort -nr |\
-  while read _report ; do
-    source $_report
-    # Set the defualts for unspecified data
-    # This section should be removed, after final testing.
-    # All reports should have this information automatically added.
-    [[ -z "${DESCRIPTION}" ]]        && DESCRIPTION="&lt;unspecified&gt;"
-    [[ -z "${PROMPT}" ]]             && PROMPT="Provide general feedback to today's class."
-    [[ -z "${RECORDED_ATTENDEES}" ]] && RECORDED_ATTENDEES="--"
 
-    summarize_lecture
-  done
+if [[ -z "$_report" ]] ; then
+   # process all of the reports
+   X=( $(echo reports/*.env) ) 
+   for (( i=0; i< ${#X[@]} ; i++ )) ; do
+     echo ${X[$i]}
+   done | sort -nr | while read _report ; do
+       summarize_lecture $_report
+   done
+else
+   summarize_lecture $_report
+fi 
