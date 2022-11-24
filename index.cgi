@@ -14,9 +14,9 @@ fi
 
 
 if [[ $in_session == "FALSE" ]] ; then
-  PNG_FILE="not-in-session.png"
+  PNG_FILE="images/not-in-session.png"
 else
-  PNG_FILE="qr-code.png"
+  PNG_FILE="images/qr-code.png"
   PNG_TITLE_DIV="
     <div>
       <h3>${CLASS} ${CLASS_WEEKDAY} @ ${CLASS_TIME}</h3>
@@ -26,6 +26,7 @@ else
 fi
 
 cat <<EOF
+content-type: text/html
 
 <!DOCTYPE html>
 <html lang="en">
