@@ -67,7 +67,7 @@ content-type: text/html
   </div>
   <div class="container">
     <label for="attendees_id" class="form-label" id="attendees">Number of Attendees</label>
-    <input type="number" class="form-control" id="attendees_id" name="attendees"  value="">
+    <input type="number" class="form-control" id="attendees_id" name="attendees"  value=""/>
   </div>
   <!-- Submit buttons -->
   <div class="container">
