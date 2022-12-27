@@ -82,7 +82,7 @@ EOF
 # Process any log reports from the last two sessions
 #  -- this should be done in a better way, but good enough for now.
 #
-# This is approach as opposed to a simple `ls` was required because
+# This approach as opposed to a simple `ls` was required because
 # of the way CSUN's infrastructure works either because of security concerns
 # or a misconfigured filesystem. Moreover, the command `head` is not present
 X=( $(echo logs/*.log) ) 
