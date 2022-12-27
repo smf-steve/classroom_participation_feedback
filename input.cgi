@@ -79,8 +79,10 @@ content-Type: text/html
         <!-- Email box with label -->
       <div class="container">
           <label for="email_id" class="form-label" id="email">CSUN Email Address:</label>
-          <input type="email" autocomplete="email" class="form-control" id="email_id" name="email" placeholder="@my.csun.edu" value="">
+          <input type="email" autocomplete="on" class="form-control" id="email_id" name="email" placeholder="@my.csun.edu" value="">
       </div>
+
+
 
       <!-- Range slider with label -->
       <div class="container">
