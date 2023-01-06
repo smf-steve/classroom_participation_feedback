@@ -82,13 +82,15 @@ EOF
 # Process any log reports from the last two sessions
 #  -- this should be done in a better way, but good enough for now.
 #
-# This approach as opposed to a simple `ls` was required because
-# of the way CSUN's infrastructure works either because of security concerns
-# or a misconfigured filesystem. Moreover, the command `head` is not present
-X=( $(echo logs/*.log) ) 
+# This approach, as opposed to a simple `ls`, is required because of the
+# execution speed of the `ls` command.  This is related to how CSUN's
+# web infrastructure works either because of security concerns or 
+# a misconfigured filesystem.  
+
+X=( $(echo logs/*.log) )                 # run `ls` command
 for (( i=0; i< ${#X[@]} ; i++ )) ; do
   echo ${X[$i]}
-done  | sort -nr |sed -n '1,2p' |
+done | sort -nr | sed -n '1,2p' |
   while read _log ; do
      ./log2report  ${_log}
   done
