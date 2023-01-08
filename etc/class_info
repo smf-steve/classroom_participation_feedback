@@ -21,7 +21,11 @@ COMP122     T/R         9:00         900             Tuesday        900   	1050
 COMP122     T/R         2:00         1400            Tuesday        1400  	1550
 COMP122     T/R         9:00         900             Thursday       900   	1050
 COMP122     T/R         2:00         1400            Thursday       1400  	1550
-Mon_TEST    M/R         2:00         900             Monday         0000     	2400
+Star_TEST    M/R         2:00         900             Monday         0000     	2400
 Tue_TEST    T           2:00         1400            Tuesday        0000     	2400
 Wed_TEST    W           2:00         900             Wednesday      0000     	2400
 Thur_TEST   R           2:00         1400            Thursday       0000     	2400
+F_TEST   R           2:00         1400            Friday       0000        2400
+S_TEST   R           2:00         1400            Saturday       0000        2400
+X_TEST   R           2:00         1400            Sunday       0000        2400
+
