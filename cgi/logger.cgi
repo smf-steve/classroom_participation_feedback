@@ -19,7 +19,8 @@
 #
 #   1. Return Thank you page
 
-source participation.env 
+PARTICIPATION_HOME=".."
+source ${PARTICIPATION_HOME}/etc/participation.env 
 in_session_p
 if [[ $? != 0 ]]  ; then
   cat <<EOF
@@ -30,9 +31,6 @@ location: ./not-in-session.html
 EOF
   exit 0;
 fi
-
-LOG_FILE=logs/${FULL_DATE}:${CLASS}-${CLASS_WEEKDAY}-${CLASS_24TIME}.log
-
 
 # Create the log information
 { 
@@ -47,12 +45,12 @@ LOG_FILE=logs/${FULL_DATE}:${CLASS}-${CLASS_WEEKDAY}-${CLASS_24TIME}.log
        done   
    fi
    echo
-} | sed 's/,$//' >> $LOG_FILE
+} | sed 's/,$//' >> ${LOG_FILE}
 
 cat <<-EOF
-x-participation-info: $CLASS $CLASS_WEEKDAY $CLASS_24TIME
+x-participation-info: ${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}
 x-participation-date: $(date)
-location: ./recorded.cgi
+location: ./class_responses.cgi
 
 EOF
 

@@ -1,14 +1,28 @@
 #! /bin/bash
 
-# Start of report2html
+
+# This file is executed either 
+#   - via a cgi script, thus PARTICIPATION_HOME is defined
+#   - via the cli, thus PARTICIPATION_HOME is not defined
 #
+# It expects the file system to be laid out as defined in participation.env
+# Specifically, it needs to know the location of the "reports" directory
+
+
 # Usage: report2html
 #   -- prints all of the reports
 #
 # Usage: report2html report
 #  -- prints out just that particular report
 
-_report="$1"
+REPORT_FILE="$1"
+
+if [[ -z "${PARTICIPATION_HOME}" ]] ; then
+  PARENT=$(realpath $(dirname ${LOG_FILE})/.. )
+  LOGS=$PARENT/logs
+  REPORTS=${PARENT}/reports
+  ETC=${PARENT}/etc
+fi
 
 
 _chart_id=0;
@@ -116,14 +130,14 @@ EOF
 # of the way CSUN's infrastructure works either because of security concerns
 # or a misconfigured filesystem.
 
-if [[ -z "$_report" ]] ; then
+if [[ -z "${REPORT_FILE}" ]] ; then
    # process all of the reports
-   X=( $(echo reports/*.env) ) 
+   X=( ${REPORTS}/*.env ) 
    for (( i=0; i< ${#X[@]} ; i++ )) ; do
      echo ${X[$i]}
    done | sort -nr | while read _report ; do
        summarize_lecture $_report
    done
 else
-   summarize_lecture $_report
+   summarize_lecture ${REPORT_FILE}
 fi 

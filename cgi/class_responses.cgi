@@ -1,6 +1,7 @@
 #! /bin/bash
+PARTICIPATION_HOME=".."
+source ${PARTICIPATION_HOME}/etc/participation.env 
 
-source participation.env 
 in_session_p
 if [[ $? != 0 ]]  ; then
   cat <<EOF
@@ -50,11 +51,11 @@ EOF
 
 # If this program is called in the proper order, then both the LOG_FILE and REPORT_FILE should exist.
 if [[ -f  ${LOG_FILE} ]] ; then
-  ./log2report ${LOG_FILE} 
+  ${BIN}/log2report ${LOG_FILE} 
 fi
 
 if [[ -f ${REPORT_FILE} ]] ; then 
-  ./report2html ${REPORT_FILE}
+  ${BIN}/report2html ${REPORT_FILE}
 fi
 
 cat <<EOF

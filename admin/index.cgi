@@ -1,6 +1,7 @@
 #! /bin/bash
 
-source participation.env 
+PARTICIPATION_HOME=".."
+source ${PARTICIPATION_HOME}/etc/participation.env 
 in_session_p
 if [[ $? != 0 ]]  ; then
   in_session=FALSE
@@ -14,15 +15,14 @@ fi
 
 
 if [[ $in_session == "FALSE" ]] ; then
-  PNG_FILE="images/not-in-session.png"
+  PNG_FILE="not-in-session.png"
 else
-  PNG_FILE="images/qr-code.png"
+  PNG_FILE="qr-code.png"
   PNG_TITLE_DIV="
     <div>
       <h3>${CLASS} ${CLASS_WEEKDAY} @ ${CLASS_TIME}</h3>
       Feel free to provided feedback to today's class.
     </div>"
-
 fi
 
 cat <<EOF
@@ -51,7 +51,7 @@ content-type: text/html
    <br>
    <div class="container"  style="text-align: center;">
       ${PNG_TITLE_DIV}
-      <a href=input.cgi>
+      <a href=../cgi/input.cgi>
         <img  src="${PNG_FILE}" height="425" width="425"
         alt="A QR code to access the input.cgi script">
       </a>
@@ -67,7 +67,7 @@ content-type: text/html
   </div>
   <div class="container">
     <label for="attendees_id" class="form-label" id="attendees">Number of Attendees</label>
-    <input type="number" class="form-control" id="attendees_id" name="attendees"  value=""/>
+    <input type="number" class="form-control" id="attendees_id" name="attendees"  value="${RECORDED_ATTENDEES}"/>
   </div>
   <!-- Submit buttons -->
   <div class="container">
@@ -79,22 +79,11 @@ content-type: text/html
 </form>
 EOF
 
-# Process any log reports from the last two sessions
-#  -- this should be done in a better way, but good enough for now.
-#
-# This approach, as opposed to a simple `ls`, is required because of the
-# execution speed of the `ls` command.  This is related to how CSUN's
-# web infrastructure works either because of security concerns or 
-# a misconfigured filesystem.  
-
-X=( $(echo logs/*.log) )                 # run `ls` command
-for (( i=0; i< ${#X[@]} ; i++ )) ; do
-  echo ${X[$i]}
-done | sort -nr | sed -n '1,2p' |
-  while read _log ; do
-     ./log2report  ${_log}
-  done
-./report2html
+# Process the current REPORT_FILE 
+# So that dynamic changes occur on the page
+echo "<div>"
+  ${BIN}/report2html ${REPORT_FILE}
+echo "</div>"
 
 cat <<EOF
 </body>

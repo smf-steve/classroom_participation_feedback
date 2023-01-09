@@ -1,19 +1,27 @@
 #! /bin/bash
 
-# This file needs to be exectued from the parent of both 
-#  - the logs directory, and
-#  - the reports directory
+# This file is executed either 
+#   - via a cgi script, thus PARTICIPATION_HOME is defined
+#   - via the cli, thus PARTICIPATION_HOME is not defined
+#
+# It expects the file system to be laid out as defined in participation.env
+# Specifically, it needs to know the location of the "reports" directory
 
 LOG_FILE="$1"
 if [[ ! -f ${LOG_FILE} ]] ; then
-  echo "usage: $0 file.log"
-  echo "  output is placed into file.env"
+  echo "usage: $0 <file>.log"
+  echo "  output is placed into <file>.env"
   exit 1
 fi
 
-
-FILE_NAME_BASE=$(sed -e 's|^.*/||' -e 's|\.log$||' <<< ${LOG_FILE} )
-REPORT_FILE=reports/${FILE_NAME_BASE}.env 
+if [[ -z "${PARTICIPATION_HOME}" ]] ; then
+  PARENT=$(realpath $(dirname ${LOG_FILE})/.. )
+  LOGS=$PARENT/logs
+  REPORTS=${PARENT}/reports
+  ETC=${PARENT}/etc
+fi
+FILE_NAME_BASE=$(basename -s .log ${LOG_FILE} )
+REPORT_FILE=${REPORTS}/${FILE_NAME_BASE}.env 
 
 if [[ -f ${REPORT_FILE} ]] ; then
   # If there is a report file, source it
@@ -54,15 +62,16 @@ else
   RECORDED_ATTENDEES=
 fi
 
+TMP_FILE=/tmp/.$$.temp
 cat ${LOG_FILE}                   |
   sed '/^ *#/d'                   |
   awk -F, '{ print $5 }'          | 
   sed 's/^rating='//              |
   sed '/^-/d'                     |
-  sort -n                         > logs/.$$.temp
+  sort -n                         > ${TMP_FILE}
   while read _value ; do 
      RATINGS+=( "$_value" )
-  done < logs/.$$.temp
+  done < ${TMP_FILE}
 
 _num_ratings=${#RATINGS[@]}
 if (( _num_ratings > 0 )) ; then 
@@ -105,11 +114,11 @@ NUM_RESPONDENTS=$(sed -n '$=' ${LOG_FILE})
 cat ${LOG_FILE}              | 
   sed '/^ *#/d'              |
   awk -F, '{ print $6 }'     | 
-  sed -f response_filter.sed > logs/.$$.temp
+  sed -f ${ETC}/response_filter.sed > ${TMP_FILE}
   while read _response ; do 
      RESPONSES+=( "$_response" )
-  done < logs/.$$.temp
-rm -f logs/.$$.temp
+  done < ${TMP_FILE}
+rm -f ${TMP_FILE}
 
 # Output the information into the log file
 cat > ${REPORT_FILE} <<EOF

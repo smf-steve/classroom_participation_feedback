@@ -12,7 +12,8 @@
 #      - Rating of the Day
 #      - Feedback/response
 
-source participation.env 
+PARTICIPATION_HOME=".."
+source ${PARTICIPATION_HOME}/etc/participation.env 
 in_session_p
 if [[ $? != 0 ]]  ; then
   cat <<EOF

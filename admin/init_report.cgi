@@ -19,7 +19,8 @@
 #
 #   1. Return: main page
 
-source ./participation.env 
+PARTICIPATION_HOME=".."
+source ${PARTICIPATION_HOME}/etc/participation.env 
 in_session_p
 if [[ $? != 0 ]]  ; then
   cat <<EOF
@@ -31,8 +32,8 @@ EOF
   exit 0;
 fi
 
-ADMIN_LOG_FILE=./logs/admin/report_initialization.log
-REPORT_FILE=./reports/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_24TIME.env
+ADMIN_LOG_FILE=${LOGS}/admin/report_initialization.log
+REPORT_FILE=${REPORTS}/$FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_24TIME.env
 
 # Extract values from the query string
 if [[ -n "${QUERY_STRING}" ]] ; then 
