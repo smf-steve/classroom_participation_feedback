@@ -16,8 +16,14 @@ fi
 
 if [[ $in_session == "FALSE" ]] ; then
   PNG_FILE="not-in-session.png"
+  PNG_URL="../not-in-session.html"
+  PNG_TITLE_DIV="
+   <div>
+      <h3>No class is currently in session</h3>
+    </div>"
 else
   PNG_FILE="qr-code.png"
+  PNG_URL="../cgi/input.cgi"
   PNG_TITLE_DIV="
     <div>
       <h3>${CLASS} ${CLASS_WEEKDAY} @ ${CLASS_TIME}</h3>
@@ -51,11 +57,15 @@ content-type: text/html
    <br>
    <div class="container"  style="text-align: center;">
       ${PNG_TITLE_DIV}
-      <a href=../cgi/input.cgi>
+      <a href="${PNG_URL}">
         <img  src="${PNG_FILE}" height="425" width="425"
         alt="A QR code to access the input.cgi script">
       </a>
   </div>
+EOF
+
+if [[ ${in_session} != "FALSE" ]] ; then
+  cat <<EOF
 <form action="./init_report.cgi">
   <div class="container">
     <label for="description_id" class="form-label">Class Description:</label>
@@ -79,11 +89,13 @@ content-type: text/html
 </form>
 EOF
 
-# Process the current REPORT_FILE 
-# So that dynamic changes occur on the page
-echo "<div>"
-  ${BIN}/report2html ${REPORT_FILE}
-echo "</div>"
+  # Process the current REPORT_FILE 
+  # So that dynamic changes occur on the page
+  echo "<div>"
+    ${BIN}/report2html ${REPORT_FILE}
+  echo "</div>"
+
+fi
 
 cat <<EOF
 </body>

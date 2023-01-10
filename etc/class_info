@@ -14,7 +14,7 @@
 #
 # CLASS     CLASS_DAYS  CLASS_TIME   CLASS_24_TIME   FB_WEEKDAY     FB_BEGIN  	FB_END
 COMP122     M/W         9:00         900             Monday         900   	1050
-COMP122     M/W         2:00         1400            Monday         1400  	1550
+COMP122     M/W         2:00         1400            Monday         1800  	1550
 COMP122     M/W         9:00         900             Wednesday      900   	1050
 COMP122     M/W         2:00         1400            Wednesday      1400  	1550
 COMP122     T/R         9:00         900             Tuesday        900   	1050

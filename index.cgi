@@ -1,3 +1,10 @@
+#! /bin/bash
+
+export PARTICIPATION_HOME="."
+source ${PARTICIPATION_HOME}/etc/participation.env 
+
+echo
+cat <<EOF
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,9 +29,18 @@
     <ul>
       <li><a href="./admin/index.cgi"> Initialize Current Class</a></li>
     </ul>
+EOF
 
-   <iframe src="./cgi/reports.cgi" title="List of all the Participation reports.">
-   </iframe>
+X=( ${LOGS}/*.log)                  # run `ls` command
+for (( i=0; i< ${#X[@]} ; i++ )) ; do
+  echo ${X[$i]}
+done | sort -nr | sed -n '1,2p' |
+  while read _log ; do
+     ${BIN}/log2report ${_log}
+  done
+${BIN}/report2html
 
+cat <<EOF
 </body>
 </html>
+EOF

@@ -15,10 +15,11 @@ if [[ ! -f ${LOG_FILE} ]] ; then
 fi
 
 if [[ -z "${PARTICIPATION_HOME}" ]] ; then
-  PARENT=$(realpath $(dirname ${LOG_FILE})/.. )
-  LOGS=$PARENT/logs
-  REPORTS=${PARENT}/reports
-  ETC=${PARENT}/etc
+  export PARENT=$(realpath $(dirname ${LOG_FILE})/.. )
+  export LOGS=$PARENT/logs
+  export REPORTS=${PARENT}/reports
+  export ETC=${PARENT}/etc
+  export IMAGES=${PARENT}/images
 fi
 FILE_NAME_BASE=$(basename -s .log ${LOG_FILE} )
 REPORT_FILE=${REPORTS}/${FILE_NAME_BASE}.env 

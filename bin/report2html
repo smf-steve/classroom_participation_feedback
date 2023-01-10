@@ -14,14 +14,14 @@
 #
 # Usage: report2html report
 #  -- prints out just that particular report
-
 REPORT_FILE="$1"
 
 if [[ -z "${PARTICIPATION_HOME}" ]] ; then
-  PARENT=$(realpath $(dirname ${LOG_FILE})/.. )
-  LOGS=$PARENT/logs
-  REPORTS=${PARENT}/reports
-  ETC=${PARENT}/etc
+  export PARENT=$(realpath $(dirname ${REPORT_FILE})/.. )
+  export LOGS=$PARENT/logs
+  export REPORTS=${PARENT}/reports
+  export ETC=${PARENT}/etc
+  export IMAGES=${PARENT}/images
 fi
 
 
@@ -107,10 +107,10 @@ EOF
 for ((i=0; i < ${#RESPONSES[@]}; i++)) ; do
 
   # This is a hack
-  IMAGE=$(sed -n '/<img/s|^.*images/\(.*\.gif\).*$|\1|p' <<< ${RESPONSES[$i]} )
-  if [ -n "$IMAGE" ] ; then
-    if [ ! -e images/$IMAGE ] ; then 
-      ln -s  images/_none.gif images/$IMAGE
+  EMOJI=$(sed -n '/<img/s|^.*images/\(.*\.gif\).*$|\1|p' <<< ${RESPONSES[$i]} )
+  if [ -n "${EMOJI}" ] ; then
+    if [ ! -e ${IMAGES}/${EMOJI} ] ; then 
+      ln -s  ${IMAGES}/_none.gif ${IMAGES}/${EMOJI}
     fi
   fi 
 
@@ -129,7 +129,6 @@ EOF
 # This is approach as opposed to a simple `ls` was required because
 # of the way CSUN's infrastructure works either because of security concerns
 # or a misconfigured filesystem.
-
 if [[ -z "${REPORT_FILE}" ]] ; then
    # process all of the reports
    X=( ${REPORTS}/*.env ) 

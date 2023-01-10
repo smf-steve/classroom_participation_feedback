@@ -1,6 +1,6 @@
 #! /bin/bash
 
-PARTICIPATION_HOME=".."
+export PARTICIPATION_HOME=".."
 source ${PARTICIPATION_HOME}/etc/participation.env 
 
 cat <<EOF
@@ -33,7 +33,7 @@ EOF
 # web infrastructure works either because of security concerns or 
 # a misconfigured filesystem.  
 
-X=( ${LOGS}/*.log )                 # run `ls` command
+X=( ${LOGS}/*.log)                  # run `ls` command
 for (( i=0; i< ${#X[@]} ; i++ )) ; do
   echo ${X[$i]}
 done | sort -nr | sed -n '1,2p' |
