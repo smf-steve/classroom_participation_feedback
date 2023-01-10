@@ -22,6 +22,7 @@ if [[ $in_session == "FALSE" ]] ; then
       <h3>No class is currently in session</h3>
     </div>"
 else
+  source ${REPORT_FILE}
   PNG_FILE="qr-code.png"
   PNG_URL="../cgi/input.cgi"
   PNG_TITLE_DIV="
@@ -39,6 +40,7 @@ content-type: text/html
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="refresh" content="10">
       <title>Participation and Feedback</title>
 
       <!-- CSS CDN -->

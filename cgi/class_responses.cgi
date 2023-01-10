@@ -7,7 +7,7 @@ if [[ $? != 0 ]]  ; then
   cat <<EOF
 x-participation-info: No class in session
 x-participation-date: $(date)
-location: ./not-in-session.html
+location: ../not-in-session.html
 
 EOF
   exit 0;
@@ -50,13 +50,13 @@ content-Type: text/html
 EOF
 
 # If this program is called in the proper order, then both the LOG_FILE and REPORT_FILE should exist.
-if [[ -f  ${LOG_FILE} ]] ; then
-  ${BIN}/log2report ${LOG_FILE} 
-fi
+#if [[ -f  ${LOG_FILE} ]] ; then
+#  ${BIN}/log2report ${LOG_FILE} 
+#fi
 
-if [[ -f ${REPORT_FILE} ]] ; then 
+#if [[ -f ${REPORT_FILE} ]] ; then 
   ${BIN}/report2html ${REPORT_FILE}
-fi
+#fi
 
 cat <<EOF
 </body>

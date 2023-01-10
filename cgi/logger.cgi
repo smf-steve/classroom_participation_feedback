@@ -17,6 +17,8 @@
 #   1. Log the information
 #      logname: logs/$CLASS-$CLASS_WEEKDAY-$CLASS_24TIME:$MONTH-$DAY
 #
+#   1. Update the report file
+#
 #   1. Return Thank you page
 
 PARTICIPATION_HOME=".."
@@ -26,7 +28,7 @@ if [[ $? != 0 ]]  ; then
   cat <<EOF
 x-participation-info: No class in session
 x-participation-date: $(date)
-location: ./not-in-session.html
+location: ../not-in-session.html
 
 EOF
   exit 0;
@@ -46,6 +48,8 @@ fi
    fi
    echo
 } | sed 's/,$//' >> ${LOG_FILE}
+
+${BIN}/log2report ${LOG_FILE}
 
 cat <<-EOF
 x-participation-info: ${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}

@@ -33,13 +33,13 @@ EOF
 # web infrastructure works either because of security concerns or 
 # a misconfigured filesystem.  
 
-X=( ${LOGS}/*.log)                  # run `ls` command
-for (( i=0; i< ${#X[@]} ; i++ )) ; do
-  echo ${X[$i]}
-done | sort -nr | sed -n '1,2p' |
-  while read _log ; do
-     ${BIN}/log2report ${_log}
-  done
+# X=( ${LOGS}/*.log)                  # run `ls` command
+# for (( i=0; i< ${#X[@]} ; i++ )) ; do
+#   echo ${X[$i]}
+# done | sort -nr | sed -n '1,2p' |
+#   while read _log ; do
+#      ${BIN}/log2report ${_log}
+#   done
 ${BIN}/report2html
 
 cat <<EOF

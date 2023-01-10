@@ -19,7 +19,7 @@ if [[ $? != 0 ]]  ; then
   cat <<EOF
 x-participation-info: No class in session
 x-participation-date: $(date)
-location: ./not-in-session.html
+location: ../not-in-session.html
 
 EOF
   exit 0;
