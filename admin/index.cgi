@@ -2,10 +2,6 @@
 
 PARTICIPATION_HOME=".."
 source ${PARTICIPATION_HOME}/etc/participation.env 
-in_session_p
-if [[ $? != 0 ]]  ; then
-  in_session=FALSE
-fi
 
 ## If class is in session, then it should build the default
 ## .env file.
@@ -14,7 +10,7 @@ fi
 ## or by using the defaults -- which should be provided via participation.env
 
 
-if [[ $in_session == "FALSE" ]] ; then
+if [[ ${in_session} == "FALSE" ]] ; then
   PNG_FILE="not-in-session.png"
   PNG_URL="../not-in-session.html"
   PNG_TITLE_DIV="
@@ -66,7 +62,7 @@ content-type: text/html
   </div>
 EOF
 
-if [[ ${in_session} != "FALSE" ]] ; then
+if [[ ${in_session} == "TRUE" ]] ; then
   cat <<EOF
 <form action="./init_report.cgi">
   <div class="container">

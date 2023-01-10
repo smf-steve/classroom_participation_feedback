@@ -14,8 +14,8 @@
 
 PARTICIPATION_HOME=".."
 source ${PARTICIPATION_HOME}/etc/participation.env 
-in_session_p
-if [[ $? != 0 ]]  ; then
+
+if [[ ${in_session} == "FALSE" ]]  ; then
   cat <<EOF
 x-participation-info: No class in session
 x-participation-date: $(date)
@@ -25,7 +25,9 @@ EOF
   exit 0;
 fi
 
-
+if [[ -f ${REPORT_FILE} ]] ; then
+  source ${REPORT_FILE}
+fi
 cat <<EOF
 x-participation-info: ${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}
 x-participation-date: $(date)
@@ -66,7 +68,7 @@ content-Type: text/html
 
     <div class="container">
       <p>Participation and Feedback<br>
-         Today's Date: $(date)</p>
+         $(date)</p>
     </div>
      <div class="container">
          <label for="response_id" class="form-label">Class Coverage:</label>

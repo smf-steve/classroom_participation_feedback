@@ -21,12 +21,12 @@
 
 PARTICIPATION_HOME=".."
 source ${PARTICIPATION_HOME}/etc/participation.env 
-in_session_p
-if [[ $? != 0 ]]  ; then
+
+if [[ ${in_session} == "FALSE" ]]  ; then
   cat <<EOF
 x-participation-info: No class in session
 x-participation-date: $(date)
-location: ./not-in-session.html
+location: ../not-in-session.html
 
 EOF
   exit 0;

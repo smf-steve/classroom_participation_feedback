@@ -3,6 +3,12 @@
 export PARTICIPATION_HOME="."
 source ${PARTICIPATION_HOME}/etc/participation.env 
 
+
+REFRESH=
+if [[ ${in_session} == "TRUE" ]]  ; then
+  REFRESH='<meta http-equiv="refresh" content="10">'
+fi
+
 echo
 cat <<EOF
 <!DOCTYPE html>
@@ -10,6 +16,7 @@ cat <<EOF
   <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      ${REFRESH}
       <title>Participation and Feedback</title>
 
       <!-- CSS CDN -->
@@ -31,13 +38,6 @@ cat <<EOF
     </ul>
 EOF
 
-#X=( ${LOGS}/*.log)                  # run `ls` command
-#for (( i=0; i< ${#X[@]} ; i++ )) ; do
-#  echo ${X[$i]}
-#done | sort -nr | sed -n '1,2p' |
-#  while read _log ; do
-#     ${BIN}/log2report ${_log}
-#  done
 ${BIN}/report2html
 
 cat <<EOF
