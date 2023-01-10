@@ -66,7 +66,7 @@ if [[ ${in_session} == "TRUE" ]] ; then
   cat <<EOF
 <form action="./init_report.cgi">
   <div class="container">
-    <label for="description_id" class="form-label">Class Description:</label>
+    <label for="description_id" class="form-label">Class Coverage:</label>
     <textarea class="form-control" id="description_id" rows="3" cols="80" name="description" placeholder="${DESCRIPTION}"></textarea>
   </div>
   <div class="container">
