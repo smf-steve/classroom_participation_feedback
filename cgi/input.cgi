@@ -72,7 +72,7 @@ content-Type: text/html
     </div>
      <div class="container">
          <label for="response_id" class="form-label">Class Coverage:</label>
-         <textarea class="form-control" id="response_id" rows="1" cols="80" name="response" readonly placeholder="${DESCRIPTION}"></textarea>
+         <textarea class="form-control" id="response_id" rows="1" cols="80" name="response" readonly>${DESCRIPTION}</textarea>
      </div>
     <div class="container">
     <hr style="margin-bottom: 32px">
@@ -103,6 +103,7 @@ content-Type: text/html
 
 
       <!-- Submit buttons -->
+      <br>
       <div class="container">
         <button type="submit" id="dark" class="btn btn-outline-dark" value="Submit">Submit</button>
       </div>
