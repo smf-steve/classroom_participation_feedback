@@ -57,7 +57,7 @@ fi
 # If any of the values in the query string are empty then set to the defaults
 [[ -z ${DESCRIPTION} ]]        && DESCRIPTION="${DEFAULT_DESCRIPTION}"
 [[ -z ${PROMPT} ]]             && PROMPT="${DEFAULT_PROMPT}"
-[[ -z ${RECORDED_ATTENDEES} ]] && RECORDED_ATTENDEES="${DEFAULT_RECORDED_ATENDEES}"
+[[ -z ${RECORDED_ATTENDEES} ]] && RECORDED_ATTENDEES="${DEFAULT_RECORDED_ATTENDEES}"
 
 
 # Create the log information
@@ -89,7 +89,6 @@ CLASS_DATE="${FULL_DATE}"
 DESCRIPTION="${DESCRIPTION}"
 PROMPT="${PROMPT}"
 RECORDED_ATTENDEES="${RECORDED_ATTENDEES}"
-
 RATING_AVERAGE=0
 RATING_MEDIAN=0
 RATING_MODE=0
@@ -100,6 +99,8 @@ NUM_RESPONDENTS=
 RESPONSES=()
 EOF
 
+touch ${LOG_FILE}
+${BIN}/log2report ${LOG_FILE}
 
 cat <<-EOF
 x-participation-info: ${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}
