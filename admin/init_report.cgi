@@ -54,6 +54,11 @@ if [[ -n "${QUERY_STRING}" ]] ; then
     done   
 fi
 
+# If any of the values in the query string are empty then set to the defaults
+[[ -z ${DESCRIPTION} ]]        && DESCRIPTION="${DEFAULT_DESCRIPTION}"
+[[ -z ${PROMPT} ]]             && PROMPT="${DEFAULT_PROMPT}"
+[[ -z ${RECORDED_ATTENDEES} ]] && RECORDED_ATTENDEES="${DEFAULT_RECORDED_ATENDEES}"
+
 
 # Create the log information
 { 
@@ -85,6 +90,14 @@ DESCRIPTION="${DESCRIPTION}"
 PROMPT="${PROMPT}"
 RECORDED_ATTENDEES="${RECORDED_ATTENDEES}"
 
+RATING_AVERAGE=0
+RATING_MEDIAN=0
+RATING_MODE=0
+RATING_LOW=
+RATING_HIGH=
+RATINGS=()
+NUM_RESPONDENTS=
+RESPONSES=()
 EOF
 
 
