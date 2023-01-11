@@ -59,11 +59,10 @@ NUM_RESPONDENTS=
 RESPONSES=()
 
 TMP_FILE=/tmp/.$$.temp
-cat ${LOG_FILE}                   |
-  sed '/^ *#/d'                   |
-  awk -F, '{ print $5 }'          | 
-  sed 's/^rating='//              |
-  sed '/^-/d'                     |
+cat ${LOG_FILE}                            |
+  sed '/^ *#/d'                            |
+  sed -e 's/^.*rating=//' -e 's/,.*$//'    |
+  sed '/^-/d'                              |
   sort -n                         > ${TMP_FILE}
   while read _value ; do 
      RATINGS+=( "$_value" )
@@ -107,10 +106,10 @@ fi
 
 NUM_RESPONDENTS=$(sed -n '$=' ${LOG_FILE})
  
-#############
-cat ${LOG_FILE}              | 
-  sed '/^ *#/d'              |
-  awk -F, '{ print $6 }'     | 
+#############  Process the reponse fields
+cat ${LOG_FILE}                                   | 
+  sed '/^ *#/d'                                   |
+  sed -e 's/^.*response=//' -e 's/,.*$//'         |
   sed -f ${ETC}/response_filter.sed > ${TMP_FILE}
 
   while read _response ; do 
