@@ -75,7 +75,7 @@ if [[ ${in_session} == "TRUE" ]] ; then
   </div>
   <div class="container">
     <label for="attendees_id" class="form-label" id="attendees">Number of Attendees</label>
-    <input type="number" class="form-control" id="attendees_id" name="attendees"  value="${RECORDED_ATTENDEES}"/>
+    <input type="number" class="form-control" id="attendees_id" name="attendees"  placeholder="${RECORDED_ATTENDEES}"/>
   </div>
   <!-- Submit buttons -->
   <div class="container">
@@ -87,10 +87,12 @@ if [[ ${in_session} == "TRUE" ]] ; then
 </form>
 EOF
 
+ 
   # Process the current REPORT_FILE 
   # So that dynamic changes occur on the page
+  source ${BIN}/report2html
   echo "<div>"
-    ${BIN}/report2html ${REPORT_FILE}
+    summarize_lecture ${REPORT_FILE}
   echo "</div>"
 
 fi

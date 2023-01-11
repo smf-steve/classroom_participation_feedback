@@ -15,11 +15,8 @@ if [[ ! -f ${LOG_FILE} ]] ; then
 fi
 
 if [[ -z "${PARTICIPATION_HOME}" ]] ; then
-  export PARENT=$(realpath $(dirname ${LOG_FILE})/.. )
-  export LOGS=$PARENT/logs
-  export REPORTS=${PARENT}/reports
-  export ETC=${PARENT}/etc
-  export IMAGES=${PARENT}/images
+  PARTICIPATION_HOME=$(realpath $(dirname ${LOG_FILE})/.. )
+  source ${PARTICIPATION_HOME}/etc/participation.env 
 fi
 FILE_NAME_BASE=$(basename -s .log ${LOG_FILE} )
 REPORT_FILE=${REPORTS}/${FILE_NAME_BASE}.env 
@@ -27,22 +24,10 @@ REPORT_FILE=${REPORTS}/${FILE_NAME_BASE}.env
 if [[ -f ${REPORT_FILE} ]] ; then
   # If there is a report file, source it
   source ${REPORT_FILE}
-  # Now reset the dynamic information 
-  RATING_AVERAGE=
-  RATING_MEDIAN=
-  RATING_MODE=
-  RATING_LOW=
-  RATING_HIGH=
-  RATINGS=()
-  NUM_RESPONDENTS=
-  RESPONSES=()
 else
-  # This session should be effectively dead now... since the report is created upon
-  # inital load of input.cgi
-
-  # Define the Header values
+  # Otherwise set up the default values
   #   FILE_NAME_BASE SYNTAX:  $FULL_DATE:$CLASS-$CLASS_WEEKDAY-$CLASS_24TIME
-  FILE_NAME=${REPORT_FILE}
+  FILE_NAME="${FULL_DATE}:${CLASS}-${CLASS_WEEKDAY}-${CLASS_24TIME}.env"
 
   CLASS_DATE=$(awk -F: '{ print $1}'   <<< ${FILE_NAME_BASE})
 
@@ -58,10 +43,20 @@ else
     fi
   CLASS_TIME="${_hour}:${_min}"
 
-  DESCRIPTION=
-  PROMPT=
-  RECORDED_ATTENDEES=
+  DESCRIPTION="${DEFAULT_DESCRIPTION}"
+  PROMPT="${DEFAULT_PROMPT}"
+  RECORDED_ATTENDEES="${DEFAULT_RECORDED_ATTENDEES}"
 fi
+
+# Now reset the dynamic information 
+RATING_AVERAGE=
+RATING_MEDIAN=
+RATING_MODE=
+RATING_LOW=
+RATING_HIGH=
+RATINGS=()
+NUM_RESPONDENTS=
+RESPONSES=()
 
 TMP_FILE=/tmp/.$$.temp
 cat ${LOG_FILE}                   |
@@ -90,7 +85,7 @@ if (( _num_ratings > 0 )) ; then
   for (( i=0; i < _num_ratings; i++ )) ; do
     _sum=$(awk "{ print $_sum + ${RATINGS[$i]} }" <<< "null"  )
   done
-  RATING_AVERAGE=$(awk "{ print $_sum / $_num_ratings }" <<< "null" )
+  RATING_AVERAGE=$(awk "{ printf \"%.2f\", $_sum / $_num_ratings }" <<< "null" )
   
   RATING_MODE="0"
   mod_count=0
@@ -125,7 +120,7 @@ rm -f ${TMP_FILE}
 cat > ${REPORT_FILE} <<EOF
 # Prepared Date: $(date)
 
-FILE_NAME="${REPORT_FILE}"
+FILE_NAME="${FILE_NAME}"
 CLASS="${CLASS}"
 CLASS_WEEKDAY="${CLASS_WEEKDAY}"
 CLASS_TIME="${CLASS_TIME}"
@@ -135,8 +130,8 @@ DESCRIPTION="${DESCRIPTION}"
 PROMPT="${PROMPT}"
 RECORDED_ATTENDEES="${RECORDED_ATTENDEES}"
 
-# Above is potentially generated from input.html
-# Below is generated via the processing of the corresponding log
+# Above is potentially generated from init_report.cgi
+# Below is generated via the processing of the corresponding log file
 
 RATING_AVERAGE=${RATING_AVERAGE}
 RATING_MEDIAN=${RATING_MEDIAN}
@@ -144,17 +139,17 @@ RATING_MODE=${RATING_MODE}
 RATING_LOW=${RATING_LOW}
 RATING_HIGH=${RATING_HIGH}
 
+# NUM_RESPONDENTS is the number of students that hit the submit button
+NUM_RESPONDENTS=${NUM_RESPONDENTS}
+
 EOF
 {
   echo -n "RATINGS=("
   for ((i=0; i< ${#RATINGS[@]}; i++)) ; do
     echo -n " ${RATINGS[$i]}"
   done
-  echo ")"
-  echo
-  echo "NUM_RESPONDENTS=${NUM_RESPONDENTS}"
+  echo " )"
   echo 
-  echo "# Note that  # of RESPONSES can be less than the number of NUM_RESPONDENTS"
   echo "RESPONSES=("
   for ((i=0; i< ${#RESPONSES[@]}; i++)) ; do
     echo "    \"${RESPONSES[$i]}\""

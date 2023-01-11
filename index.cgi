@@ -38,7 +38,8 @@ cat <<EOF
     </ul>
 EOF
 
-${BIN}/report2html
+source ${BIN}/report2html
+report2html
 
 cat <<EOF
 </body>

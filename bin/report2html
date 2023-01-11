@@ -14,18 +14,9 @@
 #
 # Usage: report2html report
 #  -- prints out just that particular report
-REPORT_FILE="$1"
-
-if [[ -z "${PARTICIPATION_HOME}" ]] ; then
-  export PARENT=$(realpath $(dirname ${REPORT_FILE})/.. )
-  export LOGS=$PARENT/logs
-  export REPORTS=${PARENT}/reports
-  export ETC=${PARENT}/etc
-  export IMAGES=${PARENT}/images
-fi
 
 
-_chart_id=0;
+chart_id=0;
 function present_chart () {
    (( chart_id++))
 
@@ -49,7 +40,7 @@ cat <<EOF
         ]);
 
       var options = {
-          hAxis: {title: 'Median: ${RATING_MEDIAN}, Mean: ${RATING_AVERAGE}, Mode: ${RATING_MODE}, Count: ${#RATINGS[@]}' },
+          hAxis: {title: 'Median: ${RATING_MEDIAN}, Mean: ${RATING_AVERAGE}, Mode: ${RATING_MODE}' },
           vAxis: {minValue: 0, maxValue: 10},
           seriesType: 'bars',
           legend: { position: 'none'},
@@ -69,37 +60,14 @@ EOF
 }
 
 
-
-function summarize_lecture () {
-  _report="$1"
-
-  source $_report
-  # Set the defualts for unspecified data
-  # This section should be removed, after final testing.
-  # All reports should have this information automatically added.
-  [[ -z "${DESCRIPTION}" ]]        && DESCRIPTION="&lt;unspecified&gt;"
-  [[ -z "${PROMPT}" ]]             && PROMPT="Provide general feedback to today's class."
-  [[ -z "${RECORDED_ATTENDEES}" ]] && RECORDED_ATTENDEES="--"
+text_box_id=0;
+function present_text_box () {
+   (( text_box_id++))
 
 cat <<EOF
-<div>
-  <div style="margin-left:15%"><hr width="85%"></div>
-</div>
-<div>
-    <div comment="header">
-        <div style="float:left"><strong>${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</strong></div>
-        <div style="margin-left:20%"> ${CLASS_DATE} Class Coverage: ${DESCRIPTION}</div>
-        <div style="float:right">Responses: ${NUM_RESPONDENTS}/${RECORDED_ATTENDEES}</div>
-    </div>
-    <br>
-    <div style="width:20%;float:left">
-EOF
-    present_chart
-cat <<EOF
-    </div>
 
-    <div style="margin-left:20%">
-        <div comment="feedback-window" class="frame" style="height:200px;border-style: solid;overflow:auto;overflow-y:scroll;;padding:5px;">
+   <div comment="feedback-window" class="frame" 
+    style="height:200px; border-style:solid; overflow:auto; overflow-y:scroll; padding:5px;">
             Prompt: ${PROMPT}
             <ol> 
 EOF
@@ -119,24 +87,85 @@ done
 
 cat <<EOF
            </ol>
-        </div comment="feedback-window">
+           <hr>
+           Ratings: Count: ${#RATINGS[@]}; Median: ${RATING_MEDIAN}; Mean: ${RATING_AVERAGE}; Mode: ${RATING_MODE}
+
+    </div comment="feedback-window">
+EOF
+}
+
+
+function summarize_lecture () {
+  _report="$1"
+
+  source $_report
+  # Set the defaults for unspecified data
+  # This section should be removed, after final testing.
+  # All reports should have this information automatically added.
+  # [[ -z "${DESCRIPTION}" ]]        && DESCRIPTION="&lt;unspecified&gt;"
+  # [[ -z "${PROMPT}" ]]             && PROMPT="Provide general feedback to today's class."
+  # [[ -z "${RECORDED_ATTENDEES}" ]] && RECORDED_ATTENDEES="--"
+
+cat <<EOF
+<div>
+    <div style="margin-left:15%"><hr width="85%"></div>
+</div>
+<div>
+    <div comment="header">
+        <div style="float:left"><strong>${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</strong></div>
+        <div style="margin-left:20%"> ${CLASS_DATE} Class Coverage: ${DESCRIPTION}</div>
+        <div style="float:right">Respondents: ${NUM_RESPONDENTS}/${RECORDED_ATTENDEES}</div>
     </div>
+    <br>
+    <div style="width:20%;float:left">
+EOF
+      present_chart
+cat <<EOF
+    </div>
+EOF
+
+     present_text_box
+
+cat <<EOF
 </div>
 
 EOF
 }
 
+# cat <<EOF
+# <script>
+# function position_in_box(id) {
+#   const element = document.getElementById(id);
+#   element.scrollIntoView(false);
+# }
+# </script>
+# EOF
+
+
 # This is approach as opposed to a simple `ls` was required because
 # of the way CSUN's infrastructure works either because of security concerns
-# or a misconfigured filesystem.
-if [[ -z "${REPORT_FILE}" ]] ; then
-   # process all of the reports
-   X=( ${REPORTS}/*.env ) 
-   for (( i=0; i< ${#X[@]} ; i++ )) ; do
-     echo ${X[$i]}
-   done | sort -nr | while read _report ; do
-       summarize_lecture $_report
-   done
-else
-   summarize_lecture ${REPORT_FILE}
-fi 
+# or a configured filesystem.
+
+function report2html() {
+  REPORT_FILE="$1"
+  
+  # if called from the CLI, PARTICIPATION home is not defined
+  # but I really don't care for this case
+  # if [[ -z "${PARTICIPATION_HOME}" ]] ; then
+  #   export PARENT=$(realpath $(dirname ${REPORT_FILE})/.. )
+  #   export REPORTS=${PARENT}/reports
+  #   export IMAGES=${PARENT}/images
+  # fi
+
+  if [[ -z "${REPORT_FILE}" ]] ; then
+     # process all of the reports
+     X=( ${REPORTS}/*.env ) 
+     for (( i=0; i< ${#X[@]} ; i++ )) ; do
+       echo ${X[$i]}
+     done | sort -nr | while read _report ; do
+         summarize_lecture $_report
+     done
+  else
+     summarize_lecture ${REPORT_FILE}
+  fi 
+}
