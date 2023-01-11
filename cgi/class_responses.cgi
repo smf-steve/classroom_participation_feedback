@@ -33,15 +33,14 @@ content-Type: text/html
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   </head>
-  <body class="text-bg-light p-3" id="body">
+  <body class="text-bg-light p-3" id="body" onload="scrollToBottom()">
     <div class="container">
       <h2>${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</h2>
     </div>
-    <br>
     <div class="container">
       Your feedback has been included in the information below.
     </div>  
-    <br><br>
+    <br>
 
 EOF
 
@@ -52,16 +51,22 @@ source ${REPORT_FILE}
 cat <<EOF
     <div class="container">
     <div comment="header">
-        <div> Class Coverage: ${DESCRIPTION}</div>
-        <div style="float:right">Respondents: ${NUM_RESPONDENTS}/${RECORDED_ATTENDEES}</div>
+        <span> Class Coverage: ${DESCRIPTION}</span>
+        <span style="float:right">Respondents: ${NUM_RESPONDENTS}/${RECORDED_ATTENDEES}</span>
     </div>
-    <br>
 EOF
 
     present_text_box
 
 cat <<EOF
     </div>
+    <script>
+      element = document.getElementById("txt_box_1");
+
+      function scrollToBottom() {
+        element.scrollIntoView(false);
+      }
+    </script>
   </body>
 </html>
 EOF
