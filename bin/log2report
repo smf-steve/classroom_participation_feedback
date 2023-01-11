@@ -107,14 +107,25 @@ fi
 
 NUM_RESPONDENTS=$(sed -n '$=' ${LOG_FILE})
  
+#############
 cat ${LOG_FILE}              | 
   sed '/^ *#/d'              |
   awk -F, '{ print $6 }'     | 
   sed -f ${ETC}/response_filter.sed > ${TMP_FILE}
+
   while read _response ; do 
-     RESPONSES+=( "$_response" )
+    EMOJI=$(sed -n '/<img/s|^.*images/\(.*\.gif\).*$|\1|p' <<< ${_response} )
+    if [ -n "${EMOJI}" ] ; then
+      if [ ! -e ${IMAGES}/${EMOJI} ] ; then 
+        ln -s  ${IMAGES}/_none.gif ${IMAGES}/${EMOJI}
+       fi
+     fi 
+    
+    RESPONSES+=( "${_response}" )
   done < ${TMP_FILE}
+
 rm -f ${TMP_FILE}
+#############
 
 # Output the information into the log file
 cat > ${REPORT_FILE} <<EOF
