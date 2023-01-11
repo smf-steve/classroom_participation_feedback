@@ -85,9 +85,6 @@ cat <<EOF
          Count: ${#RATINGS[@]}; Mean: ${RATING_AVERAGE}; Median: ${RATING_MEDIAN}; Mode: ${RATING_MODE}
        </div comment="id: txt_box_${text_box_id}">
     </div comment="feedback-window">
-            Ratings: <br>
-        Count: ${#RATINGS[@]}; Mean: ${RATING_AVERAGE}; Median: ${RATING_MEDIAN}; Mode: ${RATING_MODE}
-
 EOF
 }
 
