@@ -109,9 +109,7 @@ cat <<EOF
     </ol>
   </div comment="feedback-window">
   <div class="container align-middle">
-    <span class="align-middle">
-      Mean: ${RATING_AVERAGE}; Median: ${RATING_MEDIAN}; Mode: ${RATING_MODE}
-    </span>
+      Ratings: &nbsp;&nbsp; Mean: ${RATING_AVERAGE}; &nbsp; Median: ${RATING_MEDIAN}; &nbsp; Mode: ${RATING_MODE}
   </div>
 
 EOF
