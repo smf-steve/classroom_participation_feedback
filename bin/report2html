@@ -60,18 +60,15 @@ EOF
 }
 
 
-text_box_id=0;
 function present_text_box () {
-   (( text_box_id++))
 
 cat <<EOF
 
-   <div  comment="feedback-window" class="container"
-     style="position: relative; height:200px; border-style:solid; overflow:auto; overflow-y:scroll; padding:5px;">
-       <div id="txt_box_${text_box_id}">
-         Prompt: ${PROMPT}
-
-         <ol> 
+  <div class="container">
+    Prompt: ${PROMPT}
+  </div>
+  <div class="container frame">
+    <ol id="txt_box_1"> 
 EOF
 
 for ((i=0; i < ${#RESPONSES[@]}; i++)) ; do
@@ -79,14 +76,47 @@ for ((i=0; i < ${#RESPONSES[@]}; i++)) ; do
 done
 
 cat <<EOF
-         </ol>
-         <hr>
-         Ratings: <br>
-         Count: ${#RATINGS[@]}; Mean: ${RATING_AVERAGE}; Median: ${RATING_MEDIAN}; Mode: ${RATING_MODE}
-       </div comment="id: txt_box_${text_box_id}">
-    </div comment="feedback-window">
+      <br comment="to give a visual at the end of the ol">
+    </ol>
+  </div comment="feedback-window">
+  <div class="container align-middle">
+    <span class="align-middle">
+      Mean: ${RATING_AVERAGE}; Median: ${RATING_MEDIAN}; Mode: ${RATING_MODE}
+    </span>
+  </div>
+
 EOF
 }
+
+
+function first_response () {
+
+cat <<EOF
+
+  <div class="container">
+    Prompt: ${PROMPT}
+  </div>
+  <div class="container frame">
+    <ol id="txt_box_1"> 
+EOF
+
+for ((i=0; i < ${#RESPONSES[@]}; i++)) ; do
+   echo "<li> ${RESPONSES[$i]} </li>"
+done
+
+cat <<EOF
+      <br comment="to give a visual at the end of the ol">
+    </ol>
+  </div comment="feedback-window">
+  <div class="container align-middle">
+    <span class="align-middle">
+      Mean: ${RATING_AVERAGE}; Median: ${RATING_MEDIAN}; Mode: ${RATING_MODE}
+    </span>
+  </div>
+
+EOF
+}
+
 
 
 function summarize_lecture () {
