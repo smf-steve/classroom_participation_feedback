@@ -62,44 +62,39 @@ content-Type: text/html
 
     <!-- Top of Page -->
     <div class="container">
-      <h2>${CLASS} ${CLASS_WEEKDAY} @ ${CLASS_TIME}</h3>
+      <h2>${CLASS}</h2>
+      $(date "+%A @ ${CLASS_TIME}, %b %d, %Y")
     </div>
 
     <div class="container">
-      <p>Participation and Feedback<br>
-         $(date)</p>
+      <label for="response_id" class="form-label">Class Coverage:</label>
+      <textarea class="form-control" id="response_id" cols="80" name="response" readonly> ${DESCRIPTION}</textarea>
     </div>
-     <div class="container">
-         <label for="response_id" class="form-label">Class Coverage:</label>
-         <textarea class="form-control" id="response_id" rows="1" cols="80" name="response" readonly>${DESCRIPTION}</textarea>
-     </div>
     <div class="container">
-    <hr style="margin-bottom: 32px">
+    <hr style="margin-bottom: 20px">
     </div>
+
 
     <form action="./logger.cgi">
+
+      <!-- Feedback text area with label -->
+      <div class="container">
+          <label for="response_id" class="form-label">Prompt: ${PROMPT}</label>
+          <textarea class="form-control" id="response_id" rows="6" cols="80" name="response" placeholder=
+          "Enter your response here!"></textarea>
+      </div>
+
+      <!-- Range slider with label -->
+      <div class="container">
+          <label for="rating_id" class="form-label">Overall Rating (0=low -> 10=high):</label>
+          <input type="range" class="form-label" id="rating_id" name="rating" min="-0.5" value="-0.5" max="10" step="0.5"/></span>
+      </div>
+
       <!-- Email box with label -->
       <div class="container">
           <label for="email_id" class="form-label" id="email">CSUN Email Address:</label>
           <input type="email" autocomplete="on" class="form-control" id="email_id" name="email" placeholder="@my.csun.edu" value=""/>
       </div>
-
-      <!-- Range slider with label -->
-      <br>
-      <div class="container">
-          <label for="rating_id" class="form-label">Overall Ratings for Today's Class (0=low ... 10=high):</label>
-          <span style="padding-left: 20px; background-color: white"><input type="range" class="form-label" id="rating_id" name="rating" min="-1" value="-1" max="10" step="0.5"/></span>
-      </div>
-
-
-      <!-- Feedback text area with label -->
-      <br>
-      <div class="container">
-          <label for="response_id" class="form-label">Prompt: ${PROMPT}</label>
-          <textarea class="form-control" id="response_id" rows="6" cols="80" name="response" placeholder=
-          "Either provide general feedback or provided a response to the prompt."></textarea>
-      </div>
-
 
       <!-- Submit buttons -->
       <br>

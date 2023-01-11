@@ -30,7 +30,7 @@ content-Type: text/html
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
-    <title>Class Feedback: ${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</title>
+    <title>Today's Feedback</title>
     <!-- CSS CDN -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
       <link rel="stylesheet" href="../css/participation.css">
@@ -38,15 +38,12 @@ content-Type: text/html
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   </head>
-  <body class="text-bg-light p-3 frame"  id="body" onload="scrollToBottom()">
+  <body class="text-bg-light p-3"  id="body" onload="scrollToBottom()">
     <div class="container">
       <h2>${CLASS}</h2>
-      <h2>${CLASS_WEEKDAY} ${CLASS_TIME}</h2>
+      <h4>${CLASS_WEEKDAY} @ ${CLASS_TIME}</h4>
+      $(date "+%b %d, %Y")
     </div>
-    <div class="container">
-      Your feedback has been included.
-    </div>  
-    <br>
 
 EOF
 

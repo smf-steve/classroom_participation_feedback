@@ -17,7 +17,7 @@ cat <<EOF
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       ${REFRESH}
-      <title>Participation and Feedback</title>
+      <title>Classroom Feedback</title>
 
       <!-- CSS CDN -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -30,11 +30,14 @@ cat <<EOF
   <body class="text-bg-light p-3" id="body">
   
     <div class="container">
-      <h2>Participation and Feedback</h2>
+      <h2>Classroom Feedback</h2>
     </div>
     <br>
     <ul>
-      <li><a href="./admin/index.cgi"> Initialize Current Class</a></li>
+      <li>Feedback Link for <a href="./admin/index.cgi">${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}</a></li>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+      <li><a href="">Github: Classroom Participation and Feedback System</a></li>
     </ul>
 EOF
 
