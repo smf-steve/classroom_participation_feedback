@@ -86,7 +86,7 @@ content-Type: text/html
 
       <!-- Range slider with label -->
       <div class="container">
-          <label for="rating_id" class="form-label">Overall Rating (0=low -> 10=high):</label>
+          <label for="rating_id" class="form-label">Overall Rating (0=low &rarr; 10=high):</label>
           <input type="range" class="form-label" id="rating_id" name="rating" min="-0.5" value="-0.5" max="10" step="0.5"/></span>
       </div>
 
