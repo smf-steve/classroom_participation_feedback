@@ -66,31 +66,28 @@ function present_text_box () {
 
 cat <<EOF
 
-   <div comment="feedback-window" class="frame" 
-    style="height:200px; border-style:solid; overflow:auto; overflow-y:scroll; padding:5px;">
-            Prompt: ${PROMPT}
-            <ol> 
+   <div  comment="feedback-window" class="container"
+     style="position: relative; height:200px; border-style:solid; overflow:auto; overflow-y:scroll; padding:5px;">
+       <div id="txt_box_${text_box_id}">
+         Prompt: ${PROMPT}
+
+         <ol> 
 EOF
 
 for ((i=0; i < ${#RESPONSES[@]}; i++)) ; do
-
-  # This is a hack
-  EMOJI=$(sed -n '/<img/s|^.*images/\(.*\.gif\).*$|\1|p' <<< ${RESPONSES[$i]} )
-  if [ -n "${EMOJI}" ] ; then
-    if [ ! -e ${IMAGES}/${EMOJI} ] ; then 
-      ln -s  ${IMAGES}/_none.gif ${IMAGES}/${EMOJI}
-    fi
-  fi 
-
-  echo "<li> ${RESPONSES[$i]} </li>"
+   echo "<li> ${RESPONSES[$i]} </li>"
 done
 
 cat <<EOF
-           </ol>
-           <hr>
-           Ratings: Count: ${#RATINGS[@]}; Median: ${RATING_MEDIAN}; Mean: ${RATING_AVERAGE}; Mode: ${RATING_MODE}
-
+         </ol>
+         <hr>
+         Ratings: <br>
+         Count: ${#RATINGS[@]}; Mean: ${RATING_AVERAGE}; Median: ${RATING_MEDIAN}; Mode: ${RATING_MODE}
+       </div comment="id: txt_box_${text_box_id}">
     </div comment="feedback-window">
+            Ratings: <br>
+        Count: ${#RATINGS[@]}; Mean: ${RATING_AVERAGE}; Median: ${RATING_MEDIAN}; Mode: ${RATING_MODE}
+
 EOF
 }
 
@@ -99,12 +96,6 @@ function summarize_lecture () {
   _report="$1"
 
   source $_report
-  # Set the defaults for unspecified data
-  # This section should be removed, after final testing.
-  # All reports should have this information automatically added.
-  # [[ -z "${DESCRIPTION}" ]]        && DESCRIPTION="&lt;unspecified&gt;"
-  # [[ -z "${PROMPT}" ]]             && PROMPT="Provide general feedback to today's class."
-  # [[ -z "${RECORDED_ATTENDEES}" ]] && RECORDED_ATTENDEES="--"
 
 cat <<EOF
 <div>
@@ -131,15 +122,6 @@ cat <<EOF
 
 EOF
 }
-
-# cat <<EOF
-# <script>
-# function position_in_box(id) {
-#   const element = document.getElementById(id);
-#   element.scrollIntoView(false);
-# }
-# </script>
-# EOF
 
 
 # This is approach as opposed to a simple `ls` was required because
