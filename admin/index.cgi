@@ -1,6 +1,6 @@
 #! /bin/bash
 
-PARTICIPATION_HOME=".."
+export PARTICIPATION_HOME=".."
 source ${PARTICIPATION_HOME}/etc/participation.env 
 
 ## If class is in session, then it should build the default
