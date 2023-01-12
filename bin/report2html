@@ -64,6 +64,9 @@ response_id=0;
 function present_response () {
   (( response_id ++ ))
 
+if [[ -z ${NUM_RESPONDENTS} ]] ; then 
+            NUM_RESPONDENTS="0"
+fi
 cat <<EOF
   <div class="container">
     <div class="row">
