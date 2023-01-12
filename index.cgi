@@ -37,7 +37,7 @@ cat <<EOF
         ${LINK}
         <li><a href=""></a></li>
         <li><a href=""></a></li>
-        <li><a href="">Github: Classroom Participation and Feedback System</a></li>
+        <li><a href="https://github.com/smf-steve/classroom_participation_feedback">Github: Classroom Participation and Feedback System</a></li>
       </ul>
     </div>
 EOF

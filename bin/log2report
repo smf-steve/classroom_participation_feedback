@@ -6,6 +6,16 @@
 #
 # It expects the file system to be laid out as defined in participation.env
 # Specifically, it needs to know the location of the "reports" directory
+function realpath () {
+   # CSUN web environment does not have realpath, hence there rewrite here
+   _path="$1"
+
+   if [[ "${_path:0:1}" != "/" ]] ; then
+     _path="$( (cd  $(pwd)/${_path}; pwd ) )"
+   fi
+   
+   echo $_path
+}
 
 LOG_FILE="$1"
 if [[ ! -f ${LOG_FILE} ]] ; then
@@ -16,7 +26,8 @@ fi
 
 if [[ -z "${PARTICIPATION_HOME}" ]] ; then
   export PARTICIPATION_HOME=$(realpath $(dirname ${LOG_FILE})/.. )
-  source ${PARTICIPATION_HOME}/etc/participation.env 
+  ##source ${PARTICIPATION_HOME}/etc/participation.env 
+  REPORTS=${PARTICIPATION_HOME}/reports
 fi
 FILE_NAME_BASE=$(basename ${LOG_FILE} .log )     ## Note RedHat does not support `basename -s .log ${}LOG_FILE}`
 REPORT_FILE=${REPORTS}/${FILE_NAME_BASE}.env 
