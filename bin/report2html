@@ -71,7 +71,7 @@ cat <<EOF
       Today's Feedback
       </div>
       <div class="col" style="text-align: right">
-        Respondents: ${NUM_RESPONDENTS} / ${RECORDED_ATTENDEES}</div> 
+        Respondents: ${NUM_RESPONDENTS} / ${RECORDED_ATTENDEES}
       </div>
      </div>
   <div class="container frame">

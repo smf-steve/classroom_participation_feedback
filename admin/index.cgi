@@ -18,7 +18,6 @@ if [[ ${in_session} == "FALSE" ]] ; then
       <h2>No class is currently in session</h2>
     </div>"
 else
-  source ${REPORT_FILE}
   PNG_FILE="qr-code.png"
   PNG_URL="../cgi/input.cgi"
   PNG_TITLE_DIV="

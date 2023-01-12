@@ -18,7 +18,7 @@ if [[ -z "${PARTICIPATION_HOME}" ]] ; then
   PARTICIPATION_HOME=$(realpath $(dirname ${LOG_FILE})/.. )
   source ${PARTICIPATION_HOME}/etc/participation.env 
 fi
-FILE_NAME_BASE=$(basename -s .log ${LOG_FILE} )
+FILE_NAME_BASE=$(basename ${LOG_FILE} .log )     ## Note RedHat does not support `basename -s .log ${}LOG_FILE}`
 REPORT_FILE=${REPORTS}/${FILE_NAME_BASE}.env 
 
 if [[ -f ${REPORT_FILE} ]] ; then
