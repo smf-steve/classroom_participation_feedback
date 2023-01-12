@@ -19,7 +19,7 @@
 #
 #   1. Return: main page
 
-PARTICIPATION_HOME=".."
+export PARTICIPATION_HOME=".."
 source ${PARTICIPATION_HOME}/etc/participation.env 
 
 if [[ ${in_session} == "FALSE" ]]  ; then
