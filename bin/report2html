@@ -131,6 +131,7 @@ function report2html() {
   # process all of the reports
   echo '<div class="container">'
 
+  shopt -s nullglob  
   X=( ${REPORTS}/*.env ) 
   for (( i=0; i< ${#X[@]} ; i++ )) ; do
     echo ${X[$i]}
