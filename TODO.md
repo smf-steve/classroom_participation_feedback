@@ -35,7 +35,7 @@
   1. Should the 2:00 class appear before or after the 9:00 class... (i.e. sort by military time)
 
   1. .frame width needs to be done the right way.
-  
+  1. .frame margin at the bottom to tighten up ratings.
   1. Heading Values (e.g., Prompt) should be bolded to allow them to stand out more
   1. A chart that has no data, generates a error..
 

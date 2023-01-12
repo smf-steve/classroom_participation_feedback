@@ -14,16 +14,18 @@ if [[ ${in_session} == "FALSE" ]] ; then
   PNG_FILE="not-in-session.png"
   PNG_URL="../not-in-session.html"
   PNG_TITLE_DIV="
-   <div>
-      <h3>No class is currently in session</h3>
+   <div class="container">
+      <h2>No class is currently in session</h2>
     </div>"
 else
   source ${REPORT_FILE}
   PNG_FILE="qr-code.png"
   PNG_URL="../cgi/input.cgi"
   PNG_TITLE_DIV="
-    <div>
-      <h3>${CLASS} ${CLASS_WEEKDAY} @ ${CLASS_TIME}</h3>
+    <div class="container">
+      <h2>${CLASS}</h2>
+      $(date "+%A @ ${CLASS_TIME}, %b %d, %Y")
+      <br>
       Feel free to provided feedback to today's class.
     </div>"
 fi
@@ -34,34 +36,53 @@ content-type: text/html
 <!DOCTYPE html>
 <html lang="en">
   <head>
+      <title>Feedback Link</title>
+
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta http-equiv="refresh" content="10">
 
-      <title>Feedback Link</title>
 
-      <!-- CSS CDN -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
       <link rel="stylesheet" href="../css/participation.css?nocache=$$">
 
       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   </head>
 
+<body class="text-bg-light p-3" id="body" onload="scrollToBottom()">
 
-<body class="text-bg-light p-3" id="body">
-  
-   <div class="container">
-      <h2>Participation and Feedback</h2>
-   </div>
-   <br>
-   <div class="container"  style="text-align: center;">
-      ${PNG_TITLE_DIV}
-      <a href="${PNG_URL}">
-        <img  src="${PNG_FILE}" height="425" width="425"
-        alt="A QR code to access the input.cgi script">
-      </a>
+    ${PNG_TITLE_DIV}
+
+    <div class="container">
+    <div class="row">
+      <div class="col">
+        <a href="${PNG_URL}">
+          <img src="${PNG_FILE}" height="450px" width="450px"
+          alt="A QR code to access the input.cgi script">
+        </a>
+      </div>
+EOF
+
+
+if [[ ${in_session} == "TRUE" ]] ; then
+  # Process the current REPORT_FILE 
+  # So that dynamic changes occur on the page
+  source ${BIN}/report2html
+  source ${REPORT_FILE}
+
+  echo '<div class="col">'
+    present_response
+  echo '</div>'
+  echo '<div class="col">'
+    present_chart
+  echo '</div>'
+fi
+cat <<EOF
   </div>
 EOF
+
+
+
 
 if [[ ${in_session} == "TRUE" ]] ; then
   cat <<EOF
@@ -88,17 +109,16 @@ if [[ ${in_session} == "TRUE" ]] ; then
 </form>
 EOF
 
- 
-  # Process the current REPORT_FILE 
-  # So that dynamic changes occur on the page
-  source ${BIN}/report2html
-  echo "<div>"
-    summarize_lecture ${REPORT_FILE}
-  echo "</div>"
-
 fi
 
 cat <<EOF
+    <script>
+      element = document.getElementById("txt_box_1");
+
+      function scrollToBottom() {
+        element.scrollIntoView(false);
+      }
+    </script>
 </body>
 </html>
 
