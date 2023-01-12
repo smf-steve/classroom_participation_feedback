@@ -67,13 +67,13 @@ cat <<EOF
       <textarea class="form-control" id="response_id" cols="80" name="response" readonly> ${DESCRIPTION}</textarea>
     </div>
     <div class="container">
-    <hr style="margin-bottom: 20px">
+      <hr style="margin-bottom: 20px">
     </div>
 EOF
-  echo '<div class="col">'
+  echo '<div class="container">'
     present_response
   echo '</div>'
-  echo '<div class="col">'
+  echo '<div class="container">'
     present_chart
   echo '</div>'
 
