@@ -17,6 +17,49 @@ function realpath () {
    echo $_path
 }
 
+
+function insert_image () {
+  _name="$1"
+
+  printf "<img height=\'25px\' alt=\'emoji:${_name}\'"
+  printf "loading=\'lazy\' src=\'images/${_name.gif}\'>"
+
+  # If there is no image for this emoji, then add a symbolic link
+  if [ ! -e ${IMAGES}/${_name} ] ; then 
+        ln -s  ${IMAGES}/_none.gif ${IMAGES}/${_name}
+  fi
+}
+
+
+function utf8_2_html () {
+  # Given upto 4 valid UTF-8 bytes
+  # Transform the 4 bytes to a HTML entity
+  # For example
+  #   - utf8_decode 0xE2 0x82 0xAC
+  #   - returns: &#x20ac;
+
+  case $# in 
+    4)
+      (( v = ($1 & 0x07) ))
+      ;;
+    3)
+      (( v = ($1 & 0x0F) ))
+      ;;
+    2)
+      (( v = ($1 & 0x1F) ))
+      ;;
+    1)
+      (( v = $1 ))
+    ;;
+  esac
+  shift
+  for i in "$@" ; do
+    (( v = ( v << 6 ) | ($i & 0x3F) ))
+  done
+
+  printf "&#%X;" $v
+}
+
 LOG_FILE="$1"
 if [[ ! -f ${LOG_FILE} ]] ; then
   echo "usage: $0 <file>.log"
@@ -124,12 +167,8 @@ cat ${LOG_FILE}                                   |
   sed -f ${ETC}/response_filter.sed > ${TMP_FILE}
 
   while read _response ; do 
-    EMOJI=$(sed -n '/<img/s|^.*images/\(.*\.gif\).*$|\1|p' <<< ${_response} )
-    if [ -n "${EMOJI}" ] ; then
-      if [ ! -e ${IMAGES}/${EMOJI} ] ; then 
-        ln -s  ${IMAGES}/_none.gif ${IMAGES}/${EMOJI}
-       fi
-     fi 
+    # evaluate the _response string to execute transformation code
+    _response=$(eval echo "$_response")
     
     RESPONSES+=( "${_response}" )
   done < ${TMP_FILE}

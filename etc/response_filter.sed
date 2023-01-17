@@ -1,11 +1,24 @@
-# remove the response= tag and any whitespace
-# Line 9, prior to this, we need to identify which should not be transformd to \&x
-#   or perhaps, based up the size of the resulting number, pt it back into %format
-#   s|\&#F\(.....\);|UTF-8: 0xF\1|
-s/+/ /g
-s/%0D%0A/ /g
-s|%3A\([^%]*\)%3A|<img height=\'25px\' alt=\'emoji:\1\' loading=\'lazy\' src=\'images/\1.gif\'>|g
-s/%\([0-9A-F][0-9A-F]\)/\&#x\1;/g
-s/^ *//
-/^$/d
+# Filters to handle a URL encoding from a POST to HTML symbols
+#
+# '+' -> ' '
+s|+| |g
 
+# remove the UTF-8 newlines 
+s|%0D%0A| |g
+
+# :name: ->  $(insert_image name)
+s|%3A\([^%]*\)%3A|$(insert_image \1)|
+
+# General handling of UTF+8 encodings
+# - 4 byte sequence
+s|%\(F.\)%\([89AB].\)%\([[89AB].\)%\([89AB].\)|$(utf8_2_html 0x\1 0x\2 0x\3 0x\4)|
+# - 3 byte sequence
+s|%\(E.\)%\([89AB].\)%\([89AB].\)|$(utf8_2_html 0x\1 0x\2 0x\3)|
+# - 2 byte sequence
+s|%\([CD].\)%\([89AB].\)|$(utf8_2_html 0x\1 0x\2)|
+# - 1 byte sequence
+s|%\(..\)|$(utf8_2_html 0x\1)|
+
+# Remove leading whitespace and then blank lines
+s|^[ \t]*||
+/^$/d
