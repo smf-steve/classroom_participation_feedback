@@ -66,7 +66,14 @@
      - still an issue with the reload of the page..
       * perhaps update reload on the first submit 
       * perhaps making the top part a frame.
-      
+  1. the Class Coverage box on cgi/class_response, should not be a text input box but a html redering box
+  
+  1. On submit..
+     - if any field is not empty, then
+       * values are all set to the original
+       * then update the one that is not empty
+     - if all are empty, then reset to the defaults
+
 ### Things to do
   1. Place rating in the line of the feedback
      Rating:  Feedback:  (maybe the individual ratings are not important. you can see it on the graph!)

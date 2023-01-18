@@ -4,9 +4,12 @@ export PARTICIPATION_HOME="."
 source ${PARTICIPATION_HOME}/etc/participation.env 
 
 
-LINK=
+INSESSON=
 if [[ ${in_session} == "TRUE" ]]  ; then
-  LINK="<li>Feedback Link for: <a href=\"./admin/index.cgi\">${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}</a></li>"
+  INSESSION="<div class=container>
+    Current class in session: <a href=\"./admin/index.cgi\">${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</a>
+    </div>
+    <p>"
 fi
 
 echo
@@ -32,18 +35,26 @@ cat <<EOF
     <div class="container">
       <h2>Classroom Feedback</h2>
     </div>
+    ${INSESSION}
     <div class="container">
+      Classes Assocatied with the Classroom Feedback System
       <ul>
-        ${LINK}
-        <li><a href=""></a></li>
-        <li><a href=""></a></li>
-        <li><a href="https://github.com/smf-steve/classroom_participation_feedback">Github: Classroom Participation and Feedback System</a></li>
+        <li>COMP122     M/W         9:00<a href=""></a></li>
+        <li>COMP122     M/W         9:00<a href=""></a></li>
+        <li>COMP122     T/R         2:00<a href=""></a></li>
+        <li>COMP122     T/R         2:00<a href=""></a></li>
+      </ul>
+      <a href="https://github.com/smf-steve/classroom_participation_feedback">Github: Classroom Participation and Feedback System</a></li>
       </ul>
     </div>
 EOF
 
-source ${BIN}/report2html
-report2html
+        ${LINK}
+echo "<div class="container">"
+  echo "Reports for Spring 2023 Classes"
+  source ${BIN}/report2html
+  report2html
+echo "</div>"
 
 cat <<EOF
 </body>
