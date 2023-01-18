@@ -7,7 +7,7 @@ source ${PARTICIPATION_HOME}/etc/participation.env
 INSESSON=
 if [[ ${in_session} == "TRUE" ]]  ; then
   INSESSION="<div class=container>
-    Current class in session: <a href=\"./admin/index.cgi\">${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</a>
+    <h5>Current class in session: <a href=\"./admin/index.cgi\">${CLASS} ${CLASS_WEEKDAY} ${CLASS_TIME}</a></h5>
     </div>
     <p>"
 fi
@@ -37,7 +37,7 @@ cat <<EOF
     </div>
     ${INSESSION}
     <div class="container">
-      Classes Assocatied with the Classroom Feedback System
+      <h5>Classes Assocatied with the Classroom Feedback System</h5>
       <ul>
         <li>COMP122     M/W         9:00<a href=""></a></li>
         <li>COMP122     M/W         9:00<a href=""></a></li>
@@ -49,9 +49,8 @@ cat <<EOF
     </div>
 EOF
 
-        ${LINK}
 echo "<div class="container">"
-  echo "Reports for Spring 2023 Classes"
+  echo "<h5>Reports for Spring 2023 Classes</h5>"
   source ${BIN}/report2html
   report2html
 echo "</div>"
