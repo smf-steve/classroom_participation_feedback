@@ -57,6 +57,9 @@
      - add a list of the classes that are under review
      - add the ability to sort based upon a class...
 
+  1. consequence off setting to the end of the <ol> on reload cause you to lose your place in reviewing the file 
+     - maybe this is just on large ... files
+
 
 ### Things to do
   1. Place rating in the line of the feedback

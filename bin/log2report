@@ -21,12 +21,12 @@ function realpath () {
 function insert_image () {
   _name="$1"
 
-  printf "<img height=\'25px\' alt=\'emoji:${_name}\'"
-  printf "loading=\'lazy\' src=\'images/${_name.gif}\'>"
+  printf "<img height=\'25px\' alt=\'emoji:${_name}\' " 
+  printf "loading=\'lazy\' src=\'images/${_name}.gif\'>"
 
   # If there is no image for this emoji, then add a symbolic link
-  if [ ! -e ${IMAGES}/${_name} ] ; then 
-        ln -s  ${IMAGES}/_none.gif ${IMAGES}/${_name}
+  if [[ ! -e ${IMAGES}/${_name}.gif ]] ; then 
+        ln -s  ${IMAGES}/_none.gif ${IMAGES}/${_name}.gif
   fi
 }
 
@@ -57,7 +57,7 @@ function utf8_2_html () {
     (( v = ( v << 6 ) | ($i & 0x3F) ))
   done
 
-  printf "&#%X;" $v
+  printf "&#x%X;" $v
 }
 
 LOG_FILE="$1"
@@ -71,6 +71,7 @@ if [[ -z "${PARTICIPATION_HOME}" ]] ; then
   export PARTICIPATION_HOME=$(realpath $(dirname ${LOG_FILE})/.. )
   ##source ${PARTICIPATION_HOME}/etc/participation.env 
   REPORTS=${PARTICIPATION_HOME}/reports
+  ETC=${PARTICIPATION_HOME}/etc
 fi
 FILE_NAME_BASE=$(basename ${LOG_FILE} .log )     ## Note RedHat does not support `basename -s .log ${}LOG_FILE}`
 REPORT_FILE=${REPORTS}/${FILE_NAME_BASE}.env 
