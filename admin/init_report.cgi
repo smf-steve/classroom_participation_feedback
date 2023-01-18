@@ -40,15 +40,18 @@ if [[ -n "${QUERY_STRING}" ]] ; then
     IFS="&" read -a pairs <<< "${QUERY_STRING}"
     for kp in "${pairs[@]}" ; do
       IFS="=" read var value <<< "${kp}"
+      value=$(sed -f ${ETC}/response_filter.sed <<< $value)
+      value=$(eval echo "$value")
+
       case "$var" in 
         description)
-           DESCRIPTION="$( sed 's/+/ /g' <<< "$value" )"
+           DESCRIPTION="${value}"
            ;;
         prompt)
-           PROMPT="$( sed 's/+/ /g' <<< "$value" )"
+           PROMPT="${value}"
            ;;
         attendees)
-           RECORDED_ATTENDEES="$value"
+           RECORDED_ATTENDEES="${value}"
            ;;
       esac
     done   

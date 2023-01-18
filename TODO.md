@@ -60,7 +60,13 @@
   1. consequence off setting to the end of the <ol> on reload cause you to lose your place in reviewing the file 
      - maybe this is just on large ... files
 
-
+  1. placing the :party_parrot: or UTF-8 chars into admin/index
+     - place the right stuff into the reports, etc.
+     - however, it does not redener correctly into the input-boxes. correctly.
+     - still an issue with the reload of the page..
+      * perhaps update reload on the first submit 
+      * perhaps making the top part a frame.
+      
 ### Things to do
   1. Place rating in the line of the feedback
      Rating:  Feedback:  (maybe the individual ratings are not important. you can see it on the graph!)
