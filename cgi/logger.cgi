@@ -36,18 +36,20 @@ fi
 
 # Create the log information
 { 
-   echo -n ${FULL_DATE},${HOUR}:${MINUTE},${CLASS}-${CLASS_WEEKDAY}-${CLASS_24TIME},
+  echo -n ${FULL_DATE},${HOUR}:${MINUTE},${CLASS}-${CLASS_WEEKDAY}-${CLASS_24TIME},
 
-   # If there is a Query String,
-   # emit the "&" separated components onto a separate line.
-   if [ -n "${QUERY_STRING}" ] ; then 
-       IFS="&" read -a pairs <<< "${QUERY_STRING}"
-       for kp in "${pairs[@]}" ; do
-         echo -n "${kp},"
-       done   
-   fi
-   echo
-} | sed 's/,$//' >> ${LOG_FILE}
+  # If there is a Query String,
+  # emit the "&" separated components onto a separate line.
+  if [ -n "${QUERY_STRING}" ] ; then 
+      IFS="&" read -a pairs <<< "${QUERY_STRING}"
+      for kp in "${pairs[@]}" ; do
+        echo -n "${kp},"
+      done   
+  fi
+  echo
+} | sed 's/,$//' >${LOG_FILE}.$$
+flock -x local-lock-file -c "cat ${LOG_FILE}.$$ >>${LOG_FILE}"
+
 
 ${BIN}/log2report ${LOG_FILE}
 
