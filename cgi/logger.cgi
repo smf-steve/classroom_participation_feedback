@@ -35,6 +35,7 @@ EOF
 fi
 
 # Create the log information
+LOG_LINE=$( 
 { 
   echo -n ${FULL_DATE},${HOUR}:${MINUTE},${CLASS}-${CLASS_WEEKDAY}-${CLASS_24TIME},
 
@@ -47,11 +48,18 @@ fi
       done   
   fi
   echo
-} | sed 's/,$//' >${LOG_FILE}.$$
-flock -x local-lock-file -c "cat ${LOG_FILE}.$$ >>${LOG_FILE}"
+} | sed 's/,$//' )
 
 
-${BIN}/log2report ${LOG_FILE}
+
+# Check to see if there is a dup
+grep  ${LOG_LINE} ${LOG_FILE}
+if [[ $? == 1 ]] ; then
+  # There were no dups so add it to the logfile
+  flock -x local-lock-file -c "echo ${LOG_LINE} >>${LOG_FILE}"
+  ${BIN}/log2report ${LOG_FILE}
+fi
+
 
 cat <<-EOF
 x-participation-info: ${CLASS} ${CLASS_WEEKDAY} ${CLASS_24TIME}
