@@ -37,7 +37,7 @@ cat <<EOF
     </div>
     ${INSESSION}
     <div class="container">
-      <h5>Classes Assocatied with the Classroom Feedback System</h5>
+      <h5>Classes Associated with the Classroom Feedback System</h5>
       <ul>
         <li>COMP122     M/W         9:00<a href=""></a></li>
         <li>COMP122     M/W         9:00<a href=""></a></li>
