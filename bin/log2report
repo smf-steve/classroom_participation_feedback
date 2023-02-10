@@ -8,6 +8,11 @@
 # Specifically, it needs to know the location of the "reports" directory
 
 
+if [[ ${PARTICIPATION_SOURCED} != "TRUE" ]] ; then
+  export PARTICIPATION_HOME=$(realpath $(dirname ${LOG_FILE})/.. )
+  source ${PARTICIPATION_HOME}/etc/participation.env 
+fi
+
 LOG_FILE="$1"
 if [[ ! -f ${LOG_FILE} ]] ; then
   echo "usage: $0 <file>.log"
@@ -15,10 +20,6 @@ if [[ ! -f ${LOG_FILE} ]] ; then
   exit 1
 fi
 
-if [[ ${PARTICIPATION_SOURCED} != "TRUE" ]] ; then
-  export PARTICIPATION_HOME=$(realpath $(dirname ${LOG_FILE})/.. )
-  source ${PARTICIPATION_HOME}/etc/participation.env 
-fi
 
 ## Note RedHat does not support `basename -s .log ${LOG_FILE}`
 FILE_NAME_BASE=$(basename ${LOG_FILE} .log )     
