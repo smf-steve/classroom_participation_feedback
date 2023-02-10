@@ -6,16 +6,6 @@
 #
 # It expects the file system to be laid out as defined in participation.env
 # Specifically, it needs to know the location of the "reports" directory
-function realpath () {
-   # CSUN web environment does not have realpath, hence there rewrite here
-   _path="$1"
-
-   if [[ "${_path:0:1}" != "/" ]] ; then
-     _path="$( (cd  $(pwd)/${_path}; pwd ) )"
-   fi
-   
-   echo $_path
-}
 
 
 LOG_FILE="$1"
@@ -25,13 +15,13 @@ if [[ ! -f ${LOG_FILE} ]] ; then
   exit 1
 fi
 
-if [[ -z "${PARTICIPATION_HOME}" ]] ; then
+if [[ ${PARTICIPATION_SOURCED} != "TRUE" ]] ; then
   export PARTICIPATION_HOME=$(realpath $(dirname ${LOG_FILE})/.. )
-  ##source ${PARTICIPATION_HOME}/etc/participation.env 
-  REPORTS=${PARTICIPATION_HOME}/reports
-  ETC=${PARTICIPATION_HOME}/etc
+  source ${PARTICIPATION_HOME}/etc/participation.env 
 fi
-FILE_NAME_BASE=$(basename ${LOG_FILE} .log )     ## Note RedHat does not support `basename -s .log ${}LOG_FILE}`
+
+## Note RedHat does not support `basename -s .log ${LOG_FILE}`
+FILE_NAME_BASE=$(basename ${LOG_FILE} .log )     
 REPORT_FILE=${REPORTS}/${FILE_NAME_BASE}.env 
 
 if [[ -f ${REPORT_FILE} ]] ; then
@@ -119,7 +109,7 @@ fi
 
 NUM_RESPONDENTS=$(sed -n '$=' ${LOG_FILE})
  
-#############  Process the reponse fields
+#############  Process the response fields
 cat ${LOG_FILE}                                   | 
   sed '/^ *#/d'                                   |
   sed -e 's/^.*response=//' -e 's/,.*$//'         |
