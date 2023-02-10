@@ -7,18 +7,22 @@
 # It expects the file system to be laid out as defined in participation.env
 # Specifically, it needs to know the location of the "reports" directory
 
-
-if [[ ${PARTICIPATION_SOURCED} != "TRUE" ]] ; then
-  export PARTICIPATION_HOME=$(realpath $(dirname ${LOG_FILE})/.. )
-  source ${PARTICIPATION_HOME}/etc/participation.env 
-fi
-
 LOG_FILE="$1"
 if [[ ! -f ${LOG_FILE} ]] ; then
   echo "usage: $0 <file>.log"
   echo "  output is placed into <file>.env"
   exit 1
 fi
+
+if [[ ${PARTICIPATION_SOURCED} != "TRUE" ]] ; then
+  export PARTICIPATION_HOME=$(realpath $(dirname ${LOG_FILE})/.. )
+  source ${PARTICIPATION_HOME}/etc/participation.env 
+
+  #LOG_FILE gets re-set by participation.env
+  # So set it back
+  LOG_FILE="$1"
+fi
+
 
 
 ## Note RedHat does not support `basename -s .log ${LOG_FILE}`
