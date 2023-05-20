@@ -40,9 +40,10 @@ cat <<EOF
       <h5>Classes Associated with the Classroom Feedback System</h5>
       <ul>
         <li>COMP122     M/W         9:00<a href=""></a></li>
-        <li>COMP122     M/W         9:00<a href=""></a></li>
-        <li>COMP122     T/R         2:00<a href=""></a></li>
-        <li>COMP122     T/R         2:00<a href=""></a></li>
+        <li>COMP122     T/R         9:00<a href=""></a></li>
+        <li>COMP122L    M/W         10:30<a href=""></a></li>
+        <li>COMP122L    T/R         12:30<a href=""></a></li>
+        <li>COMP122L    T/R         10:30<a href=""></a></li>
       </ul>
       <a href="https://github.com/smf-steve/classroom_participation_feedback">Github: Classroom Participation and Feedback System</a></li>
       </ul>
