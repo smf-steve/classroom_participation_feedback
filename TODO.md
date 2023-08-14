@@ -98,8 +98,6 @@
 
 
 ### Presentation and CSS 
-  1. Put a repo link on the index.html page
-
 
   1. Mode is not technically correct
      - The mode is a set of values.  All values within the set have the same number of occurrances.  As such, if all values are mutually exclusive the MODE is the universal set.  We have set it to Zero.

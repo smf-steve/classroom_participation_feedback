@@ -51,7 +51,7 @@ cat <<EOF
 EOF
 
 echo "<div class="container">"
-  echo "<h5>Reports for Spring 2023 Classes</h5>"
+  echo "<h5>Reports for Fall 2023 Classes</h5>"
   source ${BIN}/report2html
   report2html
 echo "</div>"
