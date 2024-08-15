@@ -13,26 +13,19 @@
 #   - FB_END:     The time, within a 24 clock, to step collecting information
 #
 # CLASS     CLASS_DAYS  CLASS_TIME   CLASS_24_TIME   FB_WEEKDAY     FB_BEGIN  	FB_END
-COMP122     M/W         9:00         900             Monday         900             1030
-COMP122     M/W         9:00         900             Wednesday      900             1030
+COMP122     M/W         10:00        1000             Monday        1000            1130
+COMP122     M/W         10:00        1000             Wednesday     1000            1130
 
-COMP122     T/R         9:00         900             Tuesday        900             1030
-COMP122     T/R         9:00         900             Thursday       900             1030
+COMP122     T/R         10:00        1000             Tuesday       1000            1130
+COMP122     T/R         10:00        1000             Thursday      1000            1130
 
-COMP122L    M/W         10:30        1030            Monday         1030            1200
-COMP122L    M/W         10:30        1030            Wednesday      1030            1200
+COMP122L    M/W         11:30        1130            Monday         1130            1300
+COMP122L    M/W         11:30        1130            Wednesday      1130            1300
 
-COMP122L    M/W         12:30        1230            Monday         1030            1400
-COMP122L    M/W         12:30        1230            Wednesday      1030            1400
+COMP122L    M/W         11:30        1330            Monday         1330            1400
+COMP122L    M/W         11:30        1330            Wednesday      1330            1400
 
-COMP122L    T/R         10:30        1030            Tuesday        1030            1200
-COMP122L    T/R         10:30        1030            Thursday       1030            1200
+COMP122L    T/R         11:30        1130            Tuesday        1130            1400
+COMP122L    T/R         11:30        1130            Thursday       1130            1400
 
-Star_TEST   M/R         2:00         900             Monday         0000            2400
-Star_TEST   M/R         2:00         900             Tuesday        0000            2400
-Star_TEST   M/R         2:00         900             Wednesday      0000            2400
-Star_TEST   M/R         2:00         900             Thursday       0000            2400
-Star_TEST   M/R         2:00         900             Friday         0000            2400
-Star_TEST   M/R         2:00         900             Saturday       0000            2400
-Star_TEST   M/R         2:00         900             Sunday         0000            2400
 

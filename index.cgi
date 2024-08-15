@@ -39,11 +39,11 @@ cat <<EOF
     <div class="container">
       <h5>Classes Associated with the Classroom Feedback System</h5>
       <ul>
-        <li>COMP122     M/W         9:00<a href=""></a></li>
-        <li>COMP122     T/R         9:00<a href=""></a></li>
-        <li>COMP122L    M/W         10:30<a href=""></a></li>
-        <li>COMP122L    T/R         12:30<a href=""></a></li>
-        <li>COMP122L    T/R         10:30<a href=""></a></li>
+        <li>COMP122     M/W         10:00<a href=""></a></li>
+        <li>COMP122     T/R         10:00<a href=""></a></li>
+        <li>COMP122L    M/W         11:30<a href=""></a></li>
+        <li>COMP122L    T/R          1:30<a href=""></a></li>
+        <li>COMP122L    T/R         11:30<a href=""></a></li>
       </ul>
       <a href="https://github.com/smf-steve/classroom_participation_feedback">Github: Classroom Participation and Feedback System</a></li>
       </ul>
@@ -51,7 +51,7 @@ cat <<EOF
 EOF
 
 echo "<div class="container">"
-  echo "<h5>Reports for Fall 2023 Classes</h5>"
+  echo "<h5>Reports for Fall 2024 Classes</h5>"
   source ${BIN}/report2html
   report2html
 echo "</div>"
