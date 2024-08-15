@@ -17,7 +17,7 @@ cat <<EOF
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <title>Classroom Feedback</title>
+      <title>Classroom Feedback for Fall 2024</title>
 
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +45,13 @@ cat <<EOF
         <li>COMP122L    T/R          1:30<a href=""></a></li>
         <li>COMP122L    T/R         11:30<a href=""></a></li>
       </ul>
-      <a href="https://github.com/smf-steve/classroom_participation_feedback">Github: Classroom Participation and Feedback System</a></li>
+      <a href="https://github.com/smf-steve/classroom_participation_feedback">Github: Classroom Participation and Feedback System</a>
+      Previous Reports:
+        <ul>
+         <li><a href="../feedback_s23"> Spring 2023</a></li>
+         <li><a href="../feedback_f23"> Fall 2023  </a></li>
+         <li><a href="../feedback_f22"> Fall 2022  </a></li>
+        </ul>
       </ul>
     </div>
 EOF
